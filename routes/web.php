@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TourOneController;
@@ -40,7 +42,6 @@ Route::get('/helpcenter-faqs', [HomeController::class, 'helpcenterFaqs']);
 Route::get('/helpcenter-guides', [HomeController::class, 'helpcenterGuides']);
 Route::get('/helpcenter-support', [HomeController::class, 'helpcenterSupport']);
 
-Route::get('/login', [HomeController::class, 'login']);
 Route::get('/signup', [HomeController::class, 'signup']);
 Route::get('/signup-success', [HomeController::class, 'signupSuccess']);
 Route::get('/forgot-password', [HomeController::class, 'forgotPassword']);
@@ -63,3 +64,15 @@ Route::get('/contact', [HomeController::class, 'contact']);
 
 Route::get('/contactus', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contactus', [ContactController::class, 'send'])->name('contact.send');
+
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('admin.dashboard');
+     Route::get('/page', [AdminHomeController::class, 'sample'])->name('admin.sample-page');
+
+});

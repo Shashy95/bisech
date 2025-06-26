@@ -4,7 +4,7 @@
 <html lang="en" class="light scroll-smooth" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>Travosy - Laravel 12 Tour & Travels Agency Template</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta content="Tour & Travels Agency Tailwind CSS Template" name="description">
         <meta content="Tour, Travels, agency, business, corporate, tour packages, journey, trip, tailwind css, Admin, Landing" name="keywords">
@@ -65,6 +65,7 @@
         <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
+        @yield('scripts')
         <!-- JAVASCRIPTS -->
     </body>
 </html>
