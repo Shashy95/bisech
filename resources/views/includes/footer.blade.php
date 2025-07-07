@@ -5,10 +5,9 @@
             <div class="col-span-12">
                 <div class="py-[60px] px-0">
                     <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+                         
                         <div class="lg:col-span-3 md:col-span-12">
-                            <a href="#" class="text-[22px] focus:outline-none">
-                                <img src="{{ asset('assets/images/logo-light.png') }}" alt="">
-                            </a>
+                           <h5 class="tracking-[1px] text-gray-100 font-semibold">About Bistech</h5>
                             <p class="mt-6 text-gray-300">Planning for a trip? We will organize your trip with the best places and within best budget!</p>
                             <ul class="list-none mt-6">
                                 <li class="inline"><a href="http://linkedin.com/" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 dark:border-gray-700 rounded-md hover:bg-red-500 hover:text-white text-slate-300"><i data-feather="linkedin" class="size-4 align-middle" title="Linkedin"></i></a></li>

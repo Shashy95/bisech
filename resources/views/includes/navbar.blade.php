@@ -39,10 +39,11 @@
         <!-- Logo container-->
         <a class="logo" href="{{ url('/') }}">
             <span class="inline-block dark:hidden">
-                <img src="{{ asset('assets/images/logo-dark.png') }}" class="h-7 l-dark" alt="">
-                <img src="{{ asset('assets/images/logo-light.png') }}" class="h-7 l-light" alt="">
+                <img src="{{ asset('assets/images/logo.jpg') }}" class="h-7 l-dark" alt="">
+                <img src="{{ asset('assets/images/logo.jpg') }}" class="h-7 l-light" alt="">
             </span>
-            <img src="{{ asset('assets/images/logo-white.png') }}" class="hidden dark:inline-block" alt="">
+            <span class="display-none font-bold text-red-500 text-2xl uppercase">Bistech</span>
+            <img src="{{ asset('assets/images/logo.jpg') }}" class="hidden dark:inline-block" alt="">
         </a>
         <!-- End Logo container-->
 
