@@ -37,6 +37,7 @@
         </div>
         
         <!-- Switcher -->
+        {{--
         <div class="fixed top-1/4 -left-2 z-50">
             <span class="relative inline-block rotate-90">
                 <input type="checkbox" class="checkbox opacity-0 absolute" id="chk">
@@ -55,6 +56,7 @@
                 <span class="py-1 px-3 relative inline-block rounded-b-md -rotate-90 bg-white dark:bg-slate-900 shadow-md dark:shadow-sm dark:shadow-gray-800 font-semibold ltr:block rtl:hidden">RTL</span>
             </a>
         </div>
+        --}}
         <!-- LTR & RTL Mode Code -->
 
         <!-- Back to top -->

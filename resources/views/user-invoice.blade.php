@@ -5,7 +5,7 @@
 
 @section('content')
 
-@include('includes.navbar3')
+@include('includes.navbar')
 
 <!-- Start Hero -->
 <section class="relative lg:py-24 py-16 bg-slate-50 dark:bg-slate-800">
@@ -35,7 +35,7 @@
                                     
                                     <li class="flex mt-3">
                                         <i data-feather="mail" class="size-4 me-3 mt-1"></i>
-                                        <a href="mailto:contact@example.com" class="text-slate-400">info@Travosy.com</a>
+                                        <a href="mailto:info@bisech.co.tz" class="text-slate-400">info@Travosy.com</a>
                                     </li>
                                     
                                     <li class="flex mt-3">

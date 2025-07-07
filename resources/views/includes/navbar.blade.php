@@ -6,25 +6,25 @@
                 <ul class="list-none">
                     <li class="inline-flex items-center">
                         <i data-feather="clock" class="text-red-500 size-4"></i>
-                        <span class="ms-2 text-slate-300">Mon-Sat: 9am to 6pm</span>
+                        <span class="ms-2 text-slate-300">Mon-Fri: 9am to 5pm</span>
                     </li>
                     <li class="inline-flex items-center ms-2">
                         <i data-feather="map-pin" class="text-red-500 size-4"></i>
-                        <span class="ms-2 text-slate-300">Houston, USA 485</span>
+                        <span class="ms-2 text-slate-300">Dar es Salaam, Tanzania</span>
                     </li>
                 </ul>
 
                 <ul class="list-none">
                     <li class="inline-flex items-center">
                         <i data-feather="mail" class="text-red-500 size-4"></i>
-                        <a href="mailto:contact@example.com" class="ms-2 text-slate-300 hover:text-slate-200">contact@example.com</a>
+                        <a href="mailto:info@bisech.co.tz" class="ms-2 text-slate-300 hover:text-slate-200">info@bisech.co.tz</a>
                     </li>
                     <li class="inline-flex items-center ms-2">
                         <ul class="list-none">
-                            <li class="inline-flex mb-0"><a href="#!" class="text-slate-300 hover:text-red-500"><i data-feather="facebook" class="size-4 align-middle" title="facebook"></i></a></li>
-                            <li class="inline-flex ms-2 mb-0"><a href="#!" class="text-slate-300 hover:text-red-500"><i data-feather="instagram" class="size-4 align-middle" title="instagram"></i></a></li>
-                            <li class="inline-flex ms-2 mb-0"><a href="#!" class="text-slate-300 hover:text-red-500"><i data-feather="twitter" class="size-4 align-middle" title="twitter"></i></a></li>
-                            <li class="inline-flex ms-2 mb-0"><a href="tel:+152534-468-854" class="text-slate-300 hover:text-red-500"><i data-feather="phone" class="size-4 align-middle" title="phone"></i></a></li>
+                            <li class="inline-flex mb-0"><a href="https://facebook.com/bisechcompany-377483546232683/" target="_blank" class="text-slate-300 hover:text-red-500"><i data-feather="facebook" class="size-4 align-middle" title="facebook"></i></a></li>
+                            <li class="inline-flex ms-2 mb-0"><a href="https://www.instagram.com/bisechtour/" target="_blank" class="text-slate-300 hover:text-red-500"><i data-feather="instagram" class="size-4 align-middle" title="instagram"></i></a></li>
+                            <li class="inline-flex ms-2 mb-0"><a href="#!" target="_blank" class="text-slate-300 hover:text-red-500"><i data-feather="twitter" class="size-4 align-middle" title="twitter"></i></a></li>
+                            <li class="inline-flex ms-2 mb-0"><a href="tel:+255718420969" target="_blank" class="text-slate-300 hover:text-red-500"><i data-feather="phone" class="size-4 align-middle" title="phone"></i></a></li>
                         </ul><!--end icon-->
                     </li>
                 </ul>
@@ -60,61 +60,15 @@
         </div>
         <!-- End Mobile Toggle -->
 
-        <!--Login button Start-->
-        <ul class="buy-button list-none mb-0">
-            <li class="dropdown inline-block relative pe-1">
-                <button data-dropdown-toggle="dropdown" class="dropdown-toggle align-middle inline-flex search-dropdown" type="button">
-                    <i data-feather="search" class="size-5 dark-icon"></i>
-                    <i data-feather="search" class="size-5 white-icon text-white"></i>
-                </button>
-                <!-- Dropdown menu -->
-                <div class="dropdown-menu absolute overflow-hidden end-0 m-0 mt-5 z-10 md:w-52 w-48 rounded-md bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-800 hidden" onclick="event.stopPropagation();">
-                    <div class="relative">
-                        <i data-feather="search" class="size-4 absolute top-[9px] end-3"></i>
-                        <input type="text" class="h-9 px-3 pe-10 w-full border-0 focus:ring-0 outline-none" name="s" id="searchItem" placeholder="Search...">
-                    </div>
-                </div>
-            </li>
-    
-            <li class="dropdown inline-block relative ps-0.5">
-                <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center" type="button">
-                    <span class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md border border-red-500 bg-red-500 text-white"><img src="{{ asset('assets/images/client/16.jpg') }}" class="rounded-md" alt=""></span>
-                </button>
-                <!-- Dropdown menu -->
-                <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-48 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-800 hidden" onclick="event.stopPropagation();">
-                    <ul class="py-2 text-start">
-                        <li>
-                            <a href="{{ url('/user-profile') }}" class="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-red-500 dark:hover:text-white"><i data-feather="user" class="size-4 me-2"></i>Profile</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/helpcenter') }}" class="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-red-500 dark:hover:text-white"><i data-feather="help-circle" class="size-4 me-2"></i>Helpcenter</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/user-setting') }}" class="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-red-500 dark:hover:text-white"><i data-feather="settings" class="size-4 me-2"></i>Settings</a>
-                        </li>
-                        <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
-                        <li>
-                            <a href="{{ url('/login') }}" class="flex items-center font-medium py-2 px-4 dark:text-white/70 hover:text-red-500 dark:hover:text-white"><i data-feather="log-out" class="size-4 me-2"></i>Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </li><!--end dropdown-->
-        </ul>
-        <!--Login button End-->
+      
 
         <div id="navigation">
             <!-- Navigation Menu-->
             <ul class="navigation-menu nav-right !justify-end nav-light">
-                <li class="has-submenu parent-menu-item">
-                    <a href="javascript:void(0)">Hero</a><span class="menu-arrow"></span>
-                    <ul class="submenu">
-                        <li><a href="{{ url('/') }}" class="sub-menu-item">Tour One</a></li>
-                        <li><a href="{{ url('/index-two') }}" class="sub-menu-item">Tour Two</a></li>
-                        <li><a href="{{ url('/index-three') }}" class="sub-menu-item">Tour Three</a></li>
-                        <li><a href="{{ url('/index-four') }}" class="sub-menu-item">Tour Four</a></li>
-                        <li><a href="{{ url('/index-five') }}" class="sub-menu-item">Tour Five</a></li>
-                    </ul>
-                </li>
+
+                 <li><a href="{{ url('/') }}" class="sub-menu-item">Home</a></li>
+
+                <li><a href="{{ url('/aboutus') }}" class="sub-menu-item">About Us</a></li>
 
                 <li class="has-submenu parent-parent-menu-item"><a href="javascript:void(0)"> Listing </a><span class="menu-arrow"></span>
                     <ul class="submenu">
@@ -146,10 +100,11 @@
                     </ul>
                 </li>
         
+                <!--
                 <li class="has-submenu parent-parent-menu-item">
                     <a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-                        <li><a href="{{ url('/aboutus') }}" class="sub-menu-item">About Us</a></li>
+
 
                         <li class="has-submenu parent-menu-item"><a href="javascript:void(0)"> My Account</a><span class="submenu-arrow"></span>
                             <ul class="submenu">
@@ -207,6 +162,8 @@
                         <li><a href="{{ url('/blog-detail') }}" class="sub-menu-item"> Blog Detail</a></li>
                     </ul> 
                 </li>
+
+                -->
 
                 <li><a href="{{ url('/contact') }}" class="sub-menu-item">Contact Us</a></li>
             </ul><!--end navigation menu-->

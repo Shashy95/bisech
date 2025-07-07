@@ -27,6 +27,12 @@
         <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
         @vite('resources/css/app.css')
         <link href="{{ asset('assets/css/tailwind.css') }}" rel="stylesheet" type="text/css">
+        
+
+         @stack('styles')
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+           
+
 
     </head>
     
@@ -41,6 +47,7 @@
         @include('includes.footer')
 
         <!-- Switcher -->
+        {{--
         <div class="fixed top-1/4 -left-2 z-50">
             <span class="relative inline-block rotate-90">
                 <input type="checkbox" class="checkbox opacity-0 absolute" id="chk">
@@ -51,14 +58,17 @@
                 </label>
             </span>
         </div>
+        --}}
 
         <!-- LTR & RTL Mode Code -->
+        {{--
         <div class="fixed top-[40%] -left-3 z-50">
             <a href="" id="switchRtl">
                 <span class="py-1 px-3 relative inline-block rounded-b-md -rotate-90 bg-white dark:bg-slate-900 shadow-md dark:shadow-sm dark:shadow-gray-800 font-semibold rtl:block ltr:hidden" >LTR</span>
                 <span class="py-1 px-3 relative inline-block rounded-b-md -rotate-90 bg-white dark:bg-slate-900 shadow-md dark:shadow-sm dark:shadow-gray-800 font-semibold ltr:block rtl:hidden">RTL</span>
             </a>
         </div>
+        --}}
         <!-- LTR & RTL Mode Code -->
 
         <!-- Back to top -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Contactus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;  
 
 class ContactController extends Controller
@@ -54,7 +55,7 @@ class ContactController extends Controller
             
 
         } catch (\Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Something went wrong. Please try again later.',

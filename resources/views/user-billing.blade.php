@@ -5,7 +5,7 @@
 
 @section('content')
 
-@include('includes.navbar3')
+@include('includes.navbar')
 
 <!-- Start Hero -->
 <section class="relative lg:pb-24 pb-16 md:mt-[84px] mt-[70px]">

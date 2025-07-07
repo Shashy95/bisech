@@ -5,7 +5,7 @@
 
 @section('content')
 
-@include('includes.navbar3')
+@include('includes.navbar')
         
 <section class="relative md:pb-24 pb-16 mt-20">
     <div class="container-fluid relative">

@@ -5,7 +5,7 @@
 
 @section('content')
 
-@include('includes.navbar2')
+@include('includes.navbar')
         
 <!-- Start Hero -->
 <section class="relative table w-full items-center py-36 bg-top bg-no-repeat bg-cover" style="background-image: url('{{ asset('assets/images/bg/cta.jpg') }}');">
