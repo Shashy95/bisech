@@ -27,7 +27,7 @@ Route::get('/tour-detail-one/{title}', [TourOneController::class, 'show'])->name
 
 Route::get('/tour-detail-two', [HomeController::class, 'tourDetailTwo']);
 
-Route::get('/aboutus', [HomeController::class, 'aboutus']);
+Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('about');
 
 Route::get('/user-profile', [HomeController::class, 'userProfile']);
 Route::get('/user-billing', [HomeController::class, 'userBilling']);
@@ -60,7 +60,7 @@ Route::get('/blog-standard', [HomeController::class, 'blogStandard']);
 Route::get('/blog-detail', [HomeController::class, 'blogDetail']);
 Route::get('/blog-detail/{title}', [BlogController::class, 'show'])->name('blog-detail');
 
-Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('/contactus', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contactus', [ContactController::class, 'send'])->name('contact.send');

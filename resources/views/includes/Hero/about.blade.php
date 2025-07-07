@@ -28,11 +28,15 @@
 
     <div class="md:col-span-7">
         <div class="lg:ms-8">
-            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">World Best Travel <br> Agency: Travosy</h3>
+            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">World Best Travel <br> Agency: Bisech</h3>
 
-            <p class="text-slate-400 max-w-xl mb-6">Get instant helpful resources about anything on the go, easily implement secure money transfer solutions, boost your daily efficiency, connect to other app users and create your own Travosy network, and much more with just a few taps. commodo consequat. Duis aute irure.</p>
+            <p class="text-slate-400 max-w-xl mb-6">
+               Bisech Investments Co. Limited is a registered limited liability Company
+                incorporated in the United Republic of Tanzania under Companies, Ordinance (CAP 212) with Certificate of Registration No . 69057.
+                <br><br>The Company was formed due to the emerging opportunities in Car Hire and Tourism business responding to the development of Tourism sector and other Business sectors in the Country. 
+            </p>
 
-            <a href="" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-red-500 text-white rounded-md">Read More <i class="mdi mdi-chevron-right align-middle ms-0.5"></i></a>
+            <a href="{{ route('about') }}" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-red-500 text-white rounded-md">Read More <i class="mdi mdi-chevron-right align-middle ms-0.5"></i></a>
         </div>
     </div>
 

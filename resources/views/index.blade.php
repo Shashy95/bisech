@@ -75,10 +75,12 @@
                             <p class="text-white/70 text-xl max-w-xl" x-text="slide.description"></p>
                         </div>
                         <div class="lg:col-span-4 md:col-span-5 md:text-center order-1 md:order-2">
+                            {{--
                             <a :href="`https://www.youtube.com/watch?v=${slide.videoId}`" target="_blank"
                                 class="lg:h-24 h-20 lg:w-24 w-20 rounded-full shadow-lg inline-flex items-center justify-center bg-white hover:bg-red-500 text-red-500 hover:text-white duration-500 ease-in-out mx-auto">
                                 <i class="mdi mdi-play text-3xl"></i>
                             </a>
+                            --}}
                         </div>
                     </div>
                 </div>
@@ -103,59 +105,69 @@
 <!-- Floating Form - Between Hero and Next Section -->
 <div class="relative -mt-40 z-30"> <!-- Reduced mb-8 to mb-4 -->
     <div class="container mx-auto px-4">
-        <form class="p-8 bg-white dark:bg-slate-900 rounded-xl shadow-xl dark:shadow-gray-700 border border-gray-200 dark:border-slate-800 max-w-7xl mx-auto">
-            <div class="registration-form text-slate-900 text-start">
-                <div class="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
-                    <!-- Search Input -->
-                    <div>
-                        <label class="form-label font-medium text-slate-900 dark:text-white">Search:</label>
-                        <div class="relative mt-2">
-                            <i data-feather="search" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                            <input name="name" type="text" class="w-full py-3 px-3 ps-10 h-12 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-md outline-none border border-gray-200 dark:border-gray-800 focus:border-red-500 transition-colors" placeholder="Search">
-                        </div>
-                    </div>
+     <form class="p-8 bg-white dark:bg-slate-900 rounded-xl shadow-xl  border border-gray-200 dark:border-slate-800 max-w-7xl mx-auto">
+    <div class="registration-form text-slate-900 text-start">
+        <div class="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
 
-                    <!-- Start Date -->
-                    <div>
-                        <label class="form-label font-medium text-slate-900 dark:text-white">Start Date:</label>
-                        <div class="relative mt-2">
-                            <i data-feather="calendar" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                            <input type="text" class="w-full py-3 px-3 ps-10 h-12 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-md border border-gray-200 dark:border-gray-800 focus:border-red-500 transition-colors" placeholder="Select Start Date">
-                        </div>
-                    </div>
-
-                    <!-- End Date -->
-                    <div>
-                        <label class="form-label font-medium text-slate-900 dark:text-white">End Date:</label>
-                        <div class="relative mt-2">
-                            <i data-feather="calendar" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                            <input type="text" class="w-full py-3 px-3 ps-10 h-12 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-md border border-gray-200 dark:border-gray-800 focus:border-red-500 transition-colors" placeholder="Select End Date">
-                        </div>
-                    </div>
-
-                    <!-- No. of Persons -->
-                    <div>
-                        <label class="form-label font-medium text-slate-900 dark:text-white">No. of person:</label>
-                        <div class="relative mt-2">
-                            <i data-feather="users" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                            <select class="form-select w-full py-3 px-3 ps-10 h-12 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-md border border-gray-200 dark:border-gray-800 focus:border-red-500 transition-colors">
-                                <option disabled selected>No. of person</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="lg:mt-[35px]">
-                        <input type="submit" class="py-2 px-5 h-12 inline-block tracking-wide text-base bg-red-500 hover:bg-red-600 text-white rounded-md w-full cursor-pointer transition-colors duration-300" value="Search">
-                    </div>
+            <!-- Search Input -->
+            <div>
+                <label class="form-label font-medium text-slate-900 dark:text-white">Search:</label>
+                <div class="relative mt-2">
+                    <i data-feather="search" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
+                    <input name="name" type="text"
+                        class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors"
+                        placeholder="Search">
                 </div>
             </div>
-        </form>
+
+            <!-- Start Date -->
+            <div>
+                <label class="form-label font-medium text-slate-900 dark:text-white">Start Date:</label>
+                <div class="relative mt-2">
+                    <i data-feather="calendar" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
+                    <input type="date" name="start_date" value="{{ date('Y-m-d') }}"
+                        class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors">
+                </div>
+            </div>
+
+            <!-- End Date -->
+            <div>
+                <label class="form-label font-medium text-slate-900 dark:text-white">End Date:</label>
+                <div class="relative mt-2">
+                    <i data-feather="calendar" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
+                    <input type="date" name="end_date" value="{{ date('Y-m-d') }}"
+                         class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors">
+                </div>
+            </div>
+
+            <!-- No. of Persons -->
+            <div>
+                <label class="form-label font-medium text-slate-900 dark:text-white">No. of person:</label>
+                <div class="relative mt-2">
+                    <i data-feather="users" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
+                    <select name="people_count"
+                        class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors cursor-pointer">
+                        <option disabled selected>No. of person</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="lg:mt-[35px]">
+                <input type="submit"
+                    class="py-2 px-5 h-12 inline-block tracking-wide text-base bg-red-500 hover:bg-red-600 text-white rounded-md w-full cursor-pointer transition-colors duration-300"
+                    value="Submit">
+            </div>
+        </div>
+    </div>
+</form>
+
+
     </div>
 </div>
 
@@ -176,7 +188,7 @@
                     <img src="https://themegavias.com/wp/travivu/wp-content/uploads/2024/12/service-1.jpg" alt="Adventure" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-6 text-center">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Adventure</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Mountain Climbing</h3>
                     <p class="text-slate-500 dark:text-slate-300 mt-2">There are many variations of passages</p>
                     <div class="mt-4">
                         <span class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-red-500 text-white rounded hover:bg-red-600 transition">
@@ -192,7 +204,7 @@
                     <img src="https://themegavias.com/wp/travivu/wp-content/uploads/2024/12/service-2.jpg" alt="Windsurfing" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-6 text-center">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Windsurfing</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Beach Holiday</h3>
                     <p class="text-slate-500 dark:text-slate-300 mt-2">There are many variations of passages</p>
                     <div class="mt-4">
                         <span class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-red-500 text-white rounded hover:bg-red-600 transition">
@@ -208,7 +220,7 @@
                     <img src="https://themegavias.com/wp/travivu/wp-content/uploads/2024/12/service-3.jpg" alt="Paragliding" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-6 text-center">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Paragliding</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Excursion Trips</h3>
                     <p class="text-slate-500 dark:text-slate-300 mt-2">There are many variations of passages</p>
                     <div class="mt-4">
                         <span class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-red-500 text-white rounded hover:bg-red-600 transition">
@@ -224,7 +236,7 @@
                     <img src="https://themegavias.com/wp/travivu/wp-content/uploads/2024/12/service-4.jpg" alt="Wildlife" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="p-6 text-center">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Wildlife</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Holiday Safaris</h3>
                     <p class="text-slate-500 dark:text-slate-300 mt-2">There are many variations of passages</p>
                     <div class="mt-4">
                         <span class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-red-500 text-white rounded hover:bg-red-600 transition">
