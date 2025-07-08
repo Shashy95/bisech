@@ -371,17 +371,59 @@ function heroSlider() {
         isTransitioning: false,
         slides: [
             {
-                image: '{{ asset('assets/images/bg/1.jpg') }}',
-                subtitle: 'Beauty of Discover',
-                title: `Let's Leave The Road,<br> And Take The Travosy`,
-                description: 'Planning for a trip? We will organize your trip with the best places and within best budget!',
+                image: '{{ asset('assets/images/slide/Bisech003.webp') }}',
+                subtitle: '',
+                title: ``,
+                description: '',
                 videoId: 'S_CGed6E610'
             },
             {
-                image: '{{ asset('assets/images/bg/2.jpg') }}',
-                subtitle: 'Adventure Begins',
+                image: '{{ asset('assets/images/slide/bisech005.jpg') }}',
+                subtitle: '',
+                title: `Adventure Begins`,
+                description: '',
+                videoId: 'S_CGed6E610'
+            },
+            {
+                image: '{{ asset('assets/images/slide/Bisech010.jpg') }}',
+                subtitle: '',
+                title: ``,
+                description: '',
+                videoId: 'S_CGed6E610'
+            },
+             {
+                image: '{{ asset('assets/images/slide/bisech002.jpg') }}',
+                subtitle: '',
+                title: 'Book your Flight',
+                description: '',
+                videoId: 'S_CGed6E610'
+            },
+             {
+                image: '{{ asset('assets/images/slide/13.jpg') }}',
+                subtitle: '',
                 title: `Explore Hidden Places,<br> Make Memories`,
-                description: 'We take you beyond maps to experience travel that feels personal and unforgettable!',
+                description: '',
+                videoId: 'S_CGed6E610'
+            },
+            {
+                image: '{{ asset('assets/images/slide/Bisech012.webp') }}',
+                subtitle: '',
+                title: `Car Rental Services`,
+                description: '',
+                videoId: 'S_CGed6E610'
+            },
+             {
+                image: '{{ asset('assets/images/slide/Bisech014.jpg') }}',
+                subtitle: '',
+                title: ``,
+                description: '',
+                videoId: 'S_CGed6E610'
+            },
+             {
+                image: '{{ asset('assets/images/slide/Bisech011.jpg') }}',
+                subtitle: '',
+                title: ``,
+                description: '',
                 videoId: 'S_CGed6E610'
             }
         ],
