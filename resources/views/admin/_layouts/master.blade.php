@@ -13,6 +13,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{ asset('assets/css/tailwind.css') }}" rel="stylesheet" />
 
+    <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <!-- DataTables & jQuery -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
@@ -46,6 +50,19 @@
             @include('admin._layouts.header')
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                  @if (session('success'))
+        <div class="mb-4 p-4 rounded-lg bg-green-100 border border-green-300 text-green-800">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mb-4 p-4 rounded-lg bg-red-100 border border-red-300 text-red-800">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
                 <div class="container mx-auto px-6 py-8">
                     @yield('body')
                 </div>

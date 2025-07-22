@@ -81,7 +81,7 @@
     const dummyData = [
         { id: 1, name: "Sample Item 1", description: "First item description", created_at: "2025-06-01" },
         { id: 2, name: "Sample Item 2", description: "Second item description", created_at: "2025-06-15" },
-        { id: 3, name: "Sample Item 3", description: "Third item description", created_at: "2025-06-20" },
+        { id: 3, name: "Sample Iatem 3", description: "Third item description", created_at: "2025-06-20" },
     ];
 
     $(document).ready(function () {

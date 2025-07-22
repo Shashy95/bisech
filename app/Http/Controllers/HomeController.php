@@ -3,13 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Slide;
+use App\Models\Tour;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        return view('index');  
-    }
+   public function index()
+{
+    $slides = \App\Models\Slide::select('title', 'subtitle', 'description', 'image')->get();
+    $tours = Tour::latest()->get();
+    return view('index', compact('slides', 'tours'));
+}
+
+public function show($slug)
+{
+    $tour = Tour::where('slug', $slug)->firstOrFail();
+
+    return view('tour.show', compact('tour'));
+}
 
     public function indexTwo()
     {
