@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\Admin\DestinationController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -20,6 +21,8 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/tour-packages/{slug}', [HomeController::class, 'show'])->name('tour-packages.show');
 // Route::get('/tour-detail-one/{title}', [TourOneController::class, 'show'])->name('tour-detail-one');
 Route::get('/tour-detail-two/{slug}', [TourController::class, 'showDetailTwo'])->name('tour-detail-two');
+Route::get('/destinations/{slug}', [HomeController::class, 'showDestination'])->name('destination.show');
+
 
 
 // Listing Layouts
@@ -81,4 +84,5 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('slides', SlideController::class);
     Route::resource('packages', PackageController::class);
     Route::resource('tour-packages', TourController::class);
+    Route::resource('destinations', DestinationController::class);
 });

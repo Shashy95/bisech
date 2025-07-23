@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Slide;
 use App\Models\Tour;
+use App\Models\Destination;
 
 class HomeController extends Controller
 {
-   public function index()
+public function index()
 {
-    $slides = \App\Models\Slide::select('title', 'subtitle', 'description', 'image')->get();
+    $slides = Slide::select('title', 'subtitle', 'description', 'image')->get();
     $tours = Tour::latest()->get();
-    return view('index', compact('slides', 'tours'));
+    $destinations = Destination::latest()->get(); // Add this line
+    return view('index', compact('slides', 'tours', 'destinations')); // Pass to view
 }
 
 public function show($slug)

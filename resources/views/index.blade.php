@@ -298,39 +298,53 @@
 
 <!-- 6. Top Destinations -->
 <section class="relative bg-gray-50 md:py-24 py-16 overflow-hidden">
-   <div class="container relative">             
-    <div class="grid grid-cols-1 pb-8">             
-        <div class="flex items-center justify-between">
-            <div class="text-center w-full">
-                <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Top Destinations</h3>              
-                <p class="text-slate-400 max-w-xl mx-auto">Planning for a trip? We will organize your trip with the best places and within best budget!</p>
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8">
+            <div class="flex items-center justify-between">
+                <div class="text-center w-full">
+                    <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">
+                        Top Destinations
+                    </h3>
+                    <p class="text-slate-400 max-w-xl mx-auto">
+                        Planning for a trip? We will organize your trip with the best places and within best budget!
+                    </p>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-3 flex-shrink-0">
+                    <!-- Left Arrow -->
+                    <button onclick="scrollLeft()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
+                            <polyline points="15 18 9 12 15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <!-- Right Arrow -->
+                    <button onclick="scrollRight()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
+                            <polyline points="9 18 15 12 9 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-            
-            <div class="hidden md:flex items-center gap-x-3 flex-shrink-0">                                  
-                <!-- Left Arrow -->                                  
-                <button onclick="scrollLeft()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">                                          
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">                                                  
-                        <polyline points="15 18 9 12 15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />                                          
-                    </svg>                                  
-                </button>                                  
-                <!-- Right Arrow -->                                  
-                <button onclick="scrollRight()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">                                          
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">                                                  
-                        <polyline points="9 18 15 12 9 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />                                          
-                    </svg>                                  
-                </button>                          
+        </div>
+
+        <!-- Marquee Scroll Container -->
+        <div class="overflow-hidden mt-6" id="marqueeContainer">
+            <div class="flex gap-6 transition-all duration-300 ease-in-out overflow-x-auto scroll-smooth" id="marqueeContent">
+                @foreach ($destinations as $destination)
+                    <div class="min-w-[300px] max-w-sm bg-white rounded-lg overflow-hidden shadow-md border border-red-500 flex-shrink-0">
+                        <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->title }}" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h4 class="text-lg font-semibold text-red-600">{{ $destination->title }}</h4>
+                            <p class="text-sm text-gray-600">{{ \Illuminate\Support\Str::limit($destination->description, 80) }}</p>
+                            <a href="{{ route('destination.show', $destination->slug) }}" class="text-blue-500 mt-2 inline-block hover:underline">View Details</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </div>                  
+        </div>
     </div>
-    
-    <!-- Marquee Container -->     
-    <div class="overflow-hidden mt-6" id="marqueeContainer">         
-        <div class="flex gap-6" id="marqueeContent">                        
-            @include('includes.Hero.top-destinations')          
-        </div>     
-    </div> 
-</div>
 </section>
+
 
 <!-- 7. Reviews -->
 <section class="relative md:py-24 py-16 overflow-hidden">
@@ -470,6 +484,18 @@ function tourSlider() {
 @endpush
 
 
+
+<script>
+    function scrollLeft() {
+        const container = document.getElementById('marqueeContent');
+        container.scrollLeft -= 300;
+    }
+
+    function scrollRight() {
+        const container = document.getElementById('marqueeContent');
+        container.scrollLeft += 300;
+    }
+</script>
 
 
   <script>
