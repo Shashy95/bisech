@@ -57,7 +57,7 @@
 
 <!-- 1. Hero Section -->
 <!-- 1. Hero Section -->
-<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[750px] pb-0 overflow-hidden mb-24">
+<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[750px] overflow-hidden mb-24">
 
     <template x-for="(slide, index) in slides" :key="index">
         <div :class="{
@@ -67,28 +67,22 @@
             class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out">
             <div class="relative h-full w-full flex items-center justify-center bg-cover bg-center"
                 :style="`background-image: url('${slide.image}')`">
-                <!-- Dark overlay -->
                 <div class="absolute inset-0 bg-slate-900/40"></div>
-
-                <!-- Slide content -->
-                <div class="container relative z-20 text-white text-center px-4">
-                    <p x-text="slide.subtitle" class="text-xl md:text-2xl font-light mb-2" x-show="slide.subtitle"></p>
-                    <h1 x-html="slide.title" class="text-4xl md:text-6xl font-bold leading-tight mb-4"></h1>
-                    <p x-text="slide.description" class="text-lg md:text-xl max-w-3xl mx-auto" x-show="slide.description"></p>
-                </div>
             </div>
         </div>
     </template>
 
-    <!-- Navigation buttons -->
-    <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-all duration-300">
+    <!-- Navigation -->
+    <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
         <i class="mdi mdi-chevron-left text-4xl"></i>
     </button>
-    <button @click="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-all duration-300">
+    <button @click="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
         <i class="mdi mdi-chevron-right text-4xl"></i>
     </button>
-
 </section>
+
+
+
 
 
 
@@ -365,108 +359,128 @@
 
 
 
-
-@push('scripts')
 <script>
-function heroSlider() {
-    return {
-        activeSlide: 0,
-        autoplayTimer: null,
-        isTransitioning: false,
-        slides: @json($slides), // Laravel injects slides as JSON
-
-        init() {
-            this.preloadImages();
-        },
-
-        preloadImages() {
-            this.slides.forEach(slide => {
-                const img = new Image();
-                img.src = slide.image;
-            });
-        },
-
-        startAutoplay() {
-            this.stopAutoplay();
-            this.autoplayTimer = setInterval(() => {
-                this.nextSlide();
-            }, 5000);
-        },
-
-        stopAutoplay() {
-            if (this.autoplayTimer) {
+    function heroSlider() {
+        return {
+            activeSlide: 0,
+            autoplayTimer: null,
+            slides: [
+                {
+                    image: "{{ asset('assets/images/bisech002.jpg') }}", // Use clean filename
+                },
+               
+            ],
+            init() {
+                this.preloadImages();
+            },
+            preloadImages() {
+                this.slides.forEach(slide => {
+                    const img = new Image();
+                    img.src = slide.image;
+                });
+            },
+            startAutoplay() {
+                this.stopAutoplay();
+                this.autoplayTimer = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            },
+            stopAutoplay() {
                 clearInterval(this.autoplayTimer);
                 this.autoplayTimer = null;
+            },
+            nextSlide() {
+                if (this.slides.length === 0) return;
+                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+            },
+            prevSlide() {
+                if (this.slides.length === 0) return;
+                this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
             }
-        },
-
-        nextSlide() {
-            if (this.isTransitioning) return;
-            this.isTransitioning = true;
-            this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-            setTimeout(() => this.isTransitioning = false, 1000);
-        },
-
-        prevSlide() {
-            if (this.isTransitioning) return;
-            this.isTransitioning = true;
-            this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
-            setTimeout(() => this.isTransitioning = false, 1000);
-        },
-
-        goToSlide(index) {
-            if (this.isTransitioning || this.activeSlide === index) return;
-            this.isTransitioning = true;
-            this.activeSlide = index;
-            setTimeout(() => this.isTransitioning = false, 1000);
-        }
+        };
     }
-}
 </script>
 
-@endpush
+
+
+
+
 
 
 
 @push('scripts')
 <script>
-function tourSlider() {
-    return {
-        active: 0,
-        tours: @json($tours),
-        pages: [],
-        timer: null,
+    function tourSlider() {
+        return {
+            active: 0,
+            pages: [],
+            tours: [
+                {
+                    id: 1,
+                    title: 'Serengeti Safari',
+                    description: 'Experience wildlife like never before in Serengeti.',
+                    slug: 'serengeti-safari',
+                    image: 'serengeti.jpg'
+                },
+                {
+                    id: 2,
+                    title: 'Zanzibar Beach',
+                    description: 'Relax at the turquoise beaches of Zanzibar.',
+                    slug: 'zanzibar-beach',
+                    image: 'zanzibar.jpg'
+                },
+                {
+                    id: 3,
+                    title: 'Mount Kilimanjaro',
+                    description: 'Climb Africa’s highest peak with expert guides.',
+                    slug: 'kilimanjaro',
+                    image: 'kilimanjaro.jpg'
+                },
+                {
+                    id: 4,
+                    title: 'Ngorongoro Crater',
+                    description: 'Explore the world’s largest volcanic caldera.',
+                    slug: 'ngorongoro',
+                    image: 'ngorongoro.jpg'
+                },
+                {
+                    id: 5,
+                    title: 'Lake Manyara',
+                    description: 'See tree-climbing lions and pink flamingos.',
+                    slug: 'lake-manyara',
+                    image: 'manyara.jpg'
+                },
+            ],
 
-        chunkArray(array, size) {
-            const chunks = [];
-            for (let i = 0; i < array.length; i += size) {
-                chunks.push(array.slice(i, i + size));
+            chunkArray(array, size) {
+                const chunks = [];
+                for (let i = 0; i < array.length; i += size) {
+                    chunks.push(array.slice(i, i + size));
+                }
+                return chunks;
+            },
+
+            startAutoSlide() {
+                this.pages = this.chunkArray(this.tours, 3);
+                setInterval(() => {
+                    this.next();
+                }, 6000);
+            },
+
+            next() {
+                this.active = (this.active + 1) % this.pages.length;
+            },
+
+            prev() {
+                this.active = (this.active - 1 + this.pages.length) % this.pages.length;
             }
-            return chunks;
-        },
-
-        startAutoSlide() {
-            this.pages = this.chunkArray(this.tours, 3); // Show 3 tours per slide
-            this.timer = setInterval(() => {
-                this.next();
-            }, 5000);
-        },
-
-        next() {
-            this.active = (this.active + 1) % this.pages.length;
-        },
-
-        prev() {
-            this.active = (this.active - 1 + this.pages.length) % this.pages.length;
-        },
-
-        goTo(index) {
-            this.active = index;
-        }
-    };
-}
+        };
+    }
 </script>
 @endpush
+
+
+
 
 
 

@@ -44,7 +44,7 @@ class DestinationController extends Controller
 
      public function showDetailTwo($slug)
 {
-    $destination = Destination::where('slug', $slug)->firstOrFail();
+    $destination$slide->image = Destination::where('slug', $slug)->firstOrFail();
     return view('destination-detail', compact('destination'));
 }
 
