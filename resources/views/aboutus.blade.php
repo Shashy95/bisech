@@ -1,7 +1,6 @@
-<!-- resources/views/aboutus.blade.php -->
 @extends('layouts.main')
 
-@section('title', 'Aboutus Page')
+@section('title', 'About Us Page')
 
 @section('content')
 
@@ -12,93 +11,130 @@
     <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/80 to-slate-900"></div>
     <div class="container relative">
         <div class="grid grid-cols-1 pb-8 text-center mt-10">
-            <h3 class="text-4xl leading-normal tracking-wider font-semibold text-white">Travosy Travel Agency</h3>
-        </div><!--end grid-->
-    </div><!--end container-->
+            <h3 class="text-4xl leading-normal tracking-wider font-semibold text-white">Bisech Agency</h3>
+        </div>
+    </div>
     
     <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
         <ul class="tracking-[0.5px] mb-0 inline-block">
-            <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out text-white/50 hover:text-white"><a href="{{ url('/') }}">Travosy</a></li>
-            <li class="inline-block text-base text-white/50 mx-0.5 ltr:rotate-0 rtl:rotate-180"><i class="mdi mdi-chevron-right"></i></li>
-            <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out text-white" aria-current="page">About Us</li>
+            <li class="inline-block uppercase text-[13px] font-bold text-white/50 hover:text-white"><a href="{{ url('/') }}">Bisech</a></li>
+            <li class="inline-block text-base text-white/50 mx-0.5"><i class="mdi mdi-chevron-right"></i></li>
+            <li class="inline-block uppercase text-[13px] font-bold text-white">About Us</li>
         </ul>
     </div>
-</section><!--end section-->
+</section>
 <!-- End Hero -->
 
-<!-- Start -->
+<!-- Start About Section -->
 <section class="relative md:py-24 py-16">
     <div class="container relative">
-        
-        <!-- includes/Hero/about.blade.php -->
+        <!-- About Content -->
         @include('includes.Hero.about')
+    </div>
 
-    </div><!--end container-->
-
+    <!-- Mission and Vision Section -->
     <div class="container relative md:mt-24 mt-16">
-        <div class="grid grid-cols-1 pb-6 text-center">
-            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Our Team</h3>
+        <div class="grid grid-cols-1 text-center pb-10">
+            <h3 class="mb-6 md:text-3xl text-2xl font-semibold">Our Mission & Vision</h3>
+            <p class="text-slate-500 max-w-2xl mx-auto mb-12">
+                At Bisech Agency, we are driven by purpose and foresight to deliver exceptional travel experiences and long-lasting impact.
+            </p>
+        </div>
 
-            <p class="text-slate-400 max-w-xl mx-auto">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
-        </div><!--end grid-->
-
-        <div class="grid md:grid-cols-12 grid-cols-1 mt-8 gap-[30px]">
-
-            <!-- includes/Pages/team.blade.php -->
-            @include('includes.Pages.team')
-
-        </div><!--end grid-->
-    </div><!--end container-->
-
-    <div class="container relative md:mt-24 mt-16">
-        <div class="grid grid-cols-1 pb-6 text-center">
-            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">What Our Users Say</h3>
-
-            <p class="text-slate-400 max-w-xl mx-auto">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
-        </div><!--end grid-->
-
-        <div class="grid grid-cols-1 mt-6">
-            <div class="tiny-three-item">
-                
-                <!-- includes/Hero/reviews.blade.php -->
-                @include('includes.Hero.reviews')
-
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Mission -->
+            <div class="bg-gray-100 dark:bg-slate-800 p-6 rounded-xl shadow-md">
+                <h4 class="text-xl font-bold text-red-600 mb-4">Our Mission</h4>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                   To deliver unparalleled car rental
+and travel experiences that delight
+our customers and create lasting
+memories. We strive to be the pre-
+mier choice by consistently provi-
+ding exceptional service, innovati-
+ve solutions, and remarkable expe-
+riences that inspire wonder and
+foster deep customer loyalty
+                </p>
             </div>
-        </div><!--end grid-->
-    </div><!--end container-->
 
-    <div class="container relative md:mt-24 mt-16">
-        <div class="grid grid-cols-1 pb-6 text-center">
-            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Travel Blogs</h3>
+            <!-- Vision -->
+            <div class="bg-gray-100 dark:bg-slate-800 p-6 rounded-xl shadow-md">
+                <h4 class="text-xl font-bold text-red-600 mb-4">Our Vision</h4>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                 
 
-            <p class="text-slate-400 max-w-xl mx-auto">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
-        </div><!--end grid-->
+To be the premier provider of
+exceptional car rental and travel
+experiences that inspire wonder
+and create lifelong memories for
+our customers.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Section -->
 
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
-            
-            <!-- includes/Hero/blog.blade.php -->
-            @include('includes.Hero.blog')
-
-        </div><!--end grid-->
-    </div><!--end container-->
-</section><!--end section-->
-<!-- End -->
-
-<!-- Insta Post Start -->
-<div class="container-fluid relative">
-    <div class="grid grid-cols-1 relative">
-        <div class="tiny-twelve-item">
-            
-            <!-- includes/Hero/insta-post.blade.php -->
-            @include('includes.Hero.insta-post')
-
+<!-- Start Core Values Section -->
+<section class="bg-white dark:bg-gray-900 pb-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-red-600">Our Core Values</h2>
+            <p class="max-w-2xl mx-auto mt-2 text-gray-600 dark:text-gray-300">
+                We are guided by principles that ensure quality, safety, sustainability, and community collaboration.
+            </p>
         </div>
 
-        <div class="absolute top-2/4 -translate-y-2/4 start-2/4 ltr:-translate-x-2/4 rtl:translate-x-2/4 text-center">
-            <a href="https://www.instagram.com/shreethemes/" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md border border-red-500 bg-red-500 text-white"><i data-feather="instagram" class="size-4"></i></a>
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 text-white">
+            <!-- Safety and Comfort -->
+            <div class="bg-red-600 rounded-xl shadow-lg p-6 hover:shadow-xl transition">
+                <h3 class="text-xl font-semibold mb-4">Safety and Comfort</h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+                    <li>Client safety and comfort is our top priority.</li>
+                    <li>All staff undergo safety training to ensure high-quality service delivery.</li>
+                    <li>Clients are provided with emergency contact numbers to report unsafe behavior.</li>
+                    <li>Drivers and staff receive regular safety inductions and reminders.</li>
+                    <li>Alcohol consumption is strictly prohibited during working hours.</li>
+                    <li>Fatigue management is emphasized for long journeys.</li>
+                    <li>All vehicles are equipped with fire extinguishers and essential safety tools.</li>
+                    <li>Seat belts are mandatory for drivers and passengers at all times.</li>
+                </ul>
+            </div>
+
+            <!-- Integrity -->
+            <div class="bg-red-600 rounded-xl shadow-lg p-6 hover:shadow-xl transition">
+                <h3 class="text-xl font-semibold mb-4">Integrity</h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+                    <li>We act with honesty and integrity in all dealings.</li>
+                    <li>No tolerance for dishonest behavior or cheating.</li>
+                    <li>We ensure client trust and the safety of their belongings.</li>
+                </ul>
+            </div>
+
+            <!-- Partnerships -->
+            <div class="bg-red-600 rounded-xl shadow-lg p-6 hover:shadow-xl transition">
+                <h3 class="text-xl font-semibold mb-4">Partnerships</h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+                    <li>We collaborate with local communities in our areas of operation.</li>
+                    <li>We build strong business partnerships for expanded service reach.</li>
+                    <li>These ensure smooth, secure client and asset transfers.</li>
+                </ul>
+            </div>
+
+            <!-- Environmental Stewardship -->
+            <div class="bg-red-600 rounded-xl shadow-lg p-6 hover:shadow-xl transition">
+                <h3 class="text-xl font-semibold mb-4">Environmental Stewardship</h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+                    <li>We strive to minimize our environmental impact.</li>
+                    <li>We support climate change mitigation efforts.</li>
+                    <li>We use fuel-efficient, low-emission vehicles.</li>
+                    <li>We reduce waste in all our services.</li>
+                </ul>
+            </div>
         </div>
-    </div><!--end grid-->
-</div><!--end container-->
-<!-- Insta Post End -->
+    </div>
+</section>
+<!-- End Core Values Section -->
 
 @endsection

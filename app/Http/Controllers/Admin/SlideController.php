@@ -19,6 +19,14 @@ class SlideController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.slides.create');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -31,7 +39,7 @@ class SlideController extends Controller
         ]);
 
         $path = $request->file('image')->store('slides', 'public');
-        $validated['image'] = '/storage/' . $path;
+        $validated['image'] = $path; // Store only relative path like 'slides/filename.jpg'
 
         Slide::create($validated);
 
@@ -59,18 +67,14 @@ class SlideController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete the old image if exists
-            if ($slide->image && Storage::exists(str_replace('/storage/', 'public/', $slide->image))) {
-                Storage::delete(str_replace('/storage/', 'public/', $slide->image));
-            }
-
+            $this->deleteImageIfExists($slide->image);
             $path = $request->file('image')->store('slides', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = $path;
         }
 
         $slide->update($validated);
 
-        return redirect()->route('slides.index')->with('success', 'Slide updated successfully.');
+        return redirect()->route('admin.slides.index')->with('success', 'Slide updated successfully.');
     }
 
     /**
@@ -78,12 +82,20 @@ class SlideController extends Controller
      */
     public function destroy(Slide $slide)
     {
-        if ($slide->image && Storage::exists(str_replace('/storage/', 'public/', $slide->image))) {
-            Storage::delete(str_replace('/storage/', 'public/', $slide->image));
-        }
-
+        $this->deleteImageIfExists($slide->image);
         $slide->delete();
 
         return redirect()->back()->with('success', 'Slide deleted successfully.');
+    }
+
+    /**
+     * Delete image from storage if it exists.
+     */
+    private function deleteImageIfExists($path)
+    {
+        $storagePath = str_replace('storage/', 'public/', $path);
+        if (Storage::exists($storagePath)) {
+            Storage::delete($storagePath);
+        }
     }
 }

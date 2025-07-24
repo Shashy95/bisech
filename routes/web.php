@@ -21,7 +21,8 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/tour-packages/{slug}', [HomeController::class, 'show'])->name('tour-packages.show');
 // Route::get('/tour-detail-one/{title}', [TourOneController::class, 'show'])->name('tour-detail-one');
 Route::get('/tour-detail-two/{slug}', [TourController::class, 'showDetailTwo'])->name('tour-detail-two');
-Route::get('/destinations/{slug}', [HomeController::class, 'showDestination'])->name('destination.show');
+Route::get('/destination-detail-two/{slug}', [DestinationController::class, 'showDetailTwo'])->name('destination-detail');
+// Route::get('/destinations/{slug}', [HomeController::class, 'showDestination'])->name('destination.show');
 
 
 

@@ -41,12 +41,14 @@ class DestinationController extends Controller
         return redirect()->route('admin.destinations.index')->with('success', 'Destination created successfully.');
     }
 
-    public function show($id)
-    {
-        $destination = Destination::findOrFail($id);
-        return view('admin.destinations.show', compact('destination'));
-    }
 
+     public function showDetailTwo($slug)
+{
+    $destination = Destination::where('slug', $slug)->firstOrFail();
+    return view('destination-detail', compact('destination'));
+}
+
+  
     public function edit(Destination $destination)
     {
         return view('admin.destinations.edit', compact('destination'));

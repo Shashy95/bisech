@@ -335,8 +335,8 @@
                         <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->title }}" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h4 class="text-lg font-semibold text-red-600">{{ $destination->title }}</h4>
-                            <p class="text-sm text-gray-600">{{ \Illuminate\Support\Str::limit($destination->description, 80) }}</p>
-                            <a href="{{ route('destination.show', $destination->slug) }}" class="text-blue-500 mt-2 inline-block hover:underline">View Details</a>
+                            <p class="text-sm text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($destination->description, 80) }}</p>
+                            <a href="{{ route('destination-detail', $destination->slug) }}" class=" p-2 relative top-1.5 bg-black rounded-3xl text-white">View Details</a>
                         </div>
                     </div>
                 @endforeach
@@ -360,22 +360,7 @@
     </div>
 </div>
 
-<div class="container relative md:mt-24 mt-16">
-        <div class="grid grid-cols-1 pb-6 text-center">
-            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Travel Blogs</h3>
 
-            <p class="text-slate-400 max-w-xl mx-auto">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
-        </div><!--end grid-->
-
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
-            
-            <!-- includes/Hero/blog.blade.php -->
-            @include('includes.Hero.blog')
-
-        </div><!--end grid-->
-    </div><!--end container-->
-    </section><!--end section-->
-<!-- End -->
 @endsection
 
 

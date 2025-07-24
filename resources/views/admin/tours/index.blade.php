@@ -32,7 +32,7 @@
                 <td class="space-x-2 text-center flex items-center justify-center">
                     <!-- Edit Button -->
                     <a href="{{ route('admin.tour-packages.edit', $tour->id) }}" class="text-blue-600 hover:text-blue-800" title="Edit">
-                        <i class="fas fa-pen-to-square"></i>
+                        <i class="fas fa-pen-to-square">edit</i>
                     </a>
 
                     <!-- Delete Button -->
@@ -40,7 +40,7 @@
                           onsubmit="return confirm('Delete this tour?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="text-red-600 hover:text-red-800" title="Delete">
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-trash">delete</i>
                         </button>
                     </form>
                 </td>
