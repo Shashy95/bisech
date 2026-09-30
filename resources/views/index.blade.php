@@ -11,23 +11,6 @@
         background-position: center;
         background-repeat: no-repeat;
     }
-    #marqueeContent {
-        animation: scroll 20s linear infinite;
-    }
-
-    #marqueeContent:hover {
-        animation-play-state: paused;
-    }
-
-    @keyframes scroll {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(calc(-100% - 1.5rem));
-        }
-    }
 
     #packagesMarqueeContent {
         animation: packagesScroll 25s linear infinite;
@@ -56,8 +39,7 @@
 @include('includes.navbar')
 
 <!-- 1. Hero Section -->
-<!-- 1. Hero Section -->
-<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[750px] overflow-hidden mb-24">
+<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[750px] overflow-hidden">
 
     <template x-for="(slide, index) in slides" :key="index">
         <div :class="{
@@ -72,7 +54,6 @@
         </div>
     </template>
 
-    <!-- Navigation -->
     <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
         <i class="mdi mdi-chevron-left text-4xl"></i>
     </button>
@@ -81,21 +62,13 @@
     </button>
 </section>
 
-
-
-
-
-
-
 <!-- Floating Form - Between Hero and Next Section -->
-<!-- Floating Form - Between Hero and Next Section -->
-<div class="relative -mt-40 z-30"> <!-- Reduced mb-8 to mb-4 -->
+<div class="relative -mt-40 z-30 mb-16">
     <div class="container mx-auto px-4">
      <form class="p-8 bg-white dark:bg-slate-900 rounded-xl shadow-xl  border border-gray-200 dark:border-slate-800 max-w-7xl mx-auto">
     <div class="registration-form text-slate-900 text-start">
         <div class="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
 
-            <!-- Search Input -->
             <div>
                 <label class="form-label font-medium text-slate-900 dark:text-white">Search:</label>
                 <div class="relative mt-2">
@@ -106,7 +79,6 @@
                 </div>
             </div>
 
-            <!-- Start Date -->
             <div>
                 <label class="form-label font-medium text-slate-900 dark:text-white">Start Date:</label>
                 <div class="relative mt-2">
@@ -116,7 +88,6 @@
                 </div>
             </div>
 
-            <!-- End Date -->
             <div>
                 <label class="form-label font-medium text-slate-900 dark:text-white">End Date:</label>
                 <div class="relative mt-2">
@@ -126,7 +97,6 @@
                 </div>
             </div>
 
-            <!-- No. of Persons -->
             <div>
                 <label class="form-label font-medium text-slate-900 dark:text-white">No. of person:</label>
                 <div class="relative mt-2">
@@ -143,7 +113,6 @@
                 </div>
             </div>
 
-            <!-- Submit -->
             <div class="lg:mt-[35px]">
                 <input type="submit"
                     class="py-2 px-5 h-12 inline-block tracking-wide text-base bg-red-500 hover:bg-red-600 text-white rounded-md w-full cursor-pointer transition-colors duration-300"
@@ -158,13 +127,10 @@
 </div>
 
 <!-- 3. Our Services -->
-<!-- Our Services Start -->
-<!-- Our Services Start -->
-<div class="container relative md:mt-24 mt-16  bg-white">
-    <div class="container mx-auto pt-20 pb-16 px-4">
+<section class="relative md:mt-16 mt-8 bg-white">
+    <div class="container mx-auto pt-12 pb-16 px-4">
         <div class="text-center mb-12">
-            
-            <h2 class="text-3xl md:text-4xl py-72 font-bold text-slate-900 dark:text-white">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
                 Choose Our Tour Types & Enjoy Now
             </h2>
         </div>
@@ -172,36 +138,12 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @php
                 $services = [
-                    [
-                        'title' => 'Car Hire',
-                        'desc' => 'From budget cars to luxury SUVs and 4x4s for off-road, perfect for any travel purpose.',
-                        'image' => '1.jpg',
-                    ],
-                    [
-                        'title' => 'Tourism Management',
-                        'desc' => 'From itinerary design to bookings & experiences, we offer end-to-end tourism solutions.',
-                        'image' => '2.jpg',
-                    ],
-                    [
-                        'title' => 'Air Ticketing',
-                        'desc' => 'Book, cancel, or reschedule domestic & international flights at competitive rates.',
-                        'image' => '3.jpg',
-                    ],
-                    [
-                        'title' => 'Mountain Climbing',
-                        'desc' => 'Join our guided adventures to breathtaking peaks — safe, fun, and unforgettable.',
-                        'image' => '4.jpg',
-                    ],
-                    [
-                        'title' => 'Beach Holiday',
-                        'desc' => 'Serene beaches, luxury stays, water sports — we tailor the perfect coastal experience.',
-                        'image' => '5.jpg',
-                    ],
-                    [
-                        'title' => 'Custom Packages',
-                        'desc' => 'Tell us your dream — we’ll design the experience: solo, family, or corporate group.',
-                        'image' => '6.jpg',
-                    ],
+                    ['title' => 'Car Hire',            'desc' => 'From budget cars to luxury SUVs and 4x4s for off-road, perfect for any travel purpose.', 'image' => '1.jpg'],
+                    ['title' => 'Tourism Management',  'desc' => 'From itinerary design to bookings & experiences, we offer end-to-end tourism solutions.',  'image' => '2.jpg'],
+                    ['title' => 'Air Ticketing',       'desc' => 'Book, cancel, or reschedule domestic & international flights at competitive rates.',      'image' => '3.jpg'],
+                    ['title' => 'Mountain Climbing',   'desc' => 'Join our guided adventures to breathtaking peaks — safe, fun, and unforgettable.',        'image' => '4.jpg'],
+                    ['title' => 'Beach Holiday',       'desc' => 'Serene beaches, luxury stays, water sports — we tailor the perfect coastal experience.',   'image' => '5.jpg'],
+                    ['title' => 'Custom Packages',     'desc' => 'Tell us your dream — we’ll design the experience: solo, family, or corporate group.',      'image' => '6.jpg'],
                 ];
             @endphp
 
@@ -220,13 +162,37 @@
             @endforeach
         </div>
     </div>
-            </div>
-
-
-
-<!-- Our Services End -->
+</section>
 
 <!-- 4. Tour Packages -->
+@php
+    $defaultTours = [
+        ['id' => 1, 'title' => 'Serengeti Safari',     'slug' => 'serengeti-safari',  'description' => 'Experience wildlife like never before in Serengeti.', 'image' => 'assets/images/listing/1.jpg',  'price' => '$450',   'days' => '3 Days', 'tag' => 'Wildlife'],
+        ['id' => 2, 'title' => 'Zanzibar Beach Escape','slug' => 'zanzibar-beach',    'description' => 'Relax at the turquoise beaches of Zanzibar.',         'image' => 'assets/images/listing/2.jpg',  'price' => '$320',   'days' => '4 Days', 'tag' => 'Beach'],
+        ['id' => 3, 'title' => 'Mount Kilimanjaro Trek','slug' => 'kilimanjaro',      'description' => 'Climb Africa’s highest peak with expert guides.',     'image' => 'assets/images/listing/3.jpg',  'price' => '$1,200', 'days' => '7 Days', 'tag' => 'Adventure'],
+        ['id' => 4, 'title' => 'Ngorongoro Crater Tour','slug' => 'ngorongoro',      'description' => 'Explore the world’s largest volcanic caldera.',       'image' => 'assets/images/listing/4.jpg',  'price' => '$380',   'days' => '2 Days', 'tag' => 'Safari'],
+        ['id' => 5, 'title' => 'Lake Manyara Day Trip', 'slug' => 'lake-manyara',     'description' => 'See tree-climbing lions and pink flamingos.',         'image' => 'assets/images/listing/5.jpg',  'price' => '$180',   'days' => '1 Day',  'tag' => 'Day Trip'],
+        ['id' => 6, 'title' => 'Tarangire Safari',      'slug' => 'tarangire-safari', 'description' => 'Giant baobabs and the largest elephant herds.',       'image' => 'assets/images/listing/6.jpg',  'price' => '$260',   'days' => '2 Days', 'tag' => 'Safari'],
+    ];
+
+    if (isset($tourPackages) && count($tourPackages) > 0) {
+        $tourList = collect($tourPackages)->map(function ($t) {
+            return [
+                'id'          => $t->id,
+                'title'       => $t->title,
+                'slug'        => $t->slug,
+                'description' => $t->description,
+                'image'       => 'storage/' . $t->image,
+                'price'       => $t->price    ?? null,
+                'days'        => $t->days     ?? null,
+                'tag'         => $t->category ?? 'Tour',
+            ];
+        })->values()->all();
+    } else {
+        $tourList = $defaultTours;
+    }
+@endphp
+
 <div class="container relative md:mt-24 mt-16" x-data="tourSlider()" x-init="startAutoSlide()">
     <div class="grid grid-cols-1 pb-8">
         <div class="flex items-center justify-between">
@@ -237,7 +203,6 @@
                 </p>
             </div>
 
-            <!-- Arrows -->
             <div class="hidden md:flex items-center gap-x-3 flex-shrink-0 z-10 relative">
                 <button @click="prev()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
@@ -255,32 +220,55 @@
     </div>
 
     <!-- Slider -->
-   <div class="relative overflow-hidden mt-6">
-    <div class="flex transition-all duration-700 ease-in-out"
-         :style="`transform: translateX(-${active * 100}%); width: ${pages.length * 100}%`">
-        <template x-for="(page, pageIndex) in pages" :key="pageIndex">
-            <div class="w-full flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-                <template x-for="tour in page" :key="tour.id">
-                    <a :href="`/tour-detail-two/${tour.slug}`" class="block bg-white rounded shadow-lg overflow-hidden hover:shadow-xl transition">
-                        <img :src="'/storage/' + tour.image" class="w-full h-48 object-cover" :alt="tour.title">
-                        <div class="p-4">
-                            <h4 class="text-lg font-bold mb-2" x-text="tour.title"></h4>
-                            <p class="text-sm text-gray-600" x-text="tour.description.substring(0, 80) + '...'"></p>
-                        </div>
-                    </a>
-                </template>
-            </div>
-        </template>
-    </div>
-</div>
+    <div class="relative overflow-hidden mt-6">
+        <div class="flex transition-all duration-700 ease-in-out"
+             :style="`transform: translateX(-${active * 100}%); width: ${pages.length * 100}%`">
+            <template x-for="(page, pageIndex) in pages" :key="pageIndex">
+                <div class="w-full flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+                    <template x-for="tour in page" :key="tour.id">
+                        <a :href="`/tour-detail-two/${tour.slug}`"
+                           class="block bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden group">
 
+                            <div class="relative">
+                                <img :src="'/' + tour.image"
+                                     class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                                     :alt="tour.title">
+                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full"
+                                      x-text="tour.tag"></span>
+                                <span x-show="tour.days"
+                                      class="absolute top-3 right-3 bg-black/70 text-white text-xs font-medium px-3 py-1 rounded-full"
+                                      x-text="tour.days"></span>
+                            </div>
+
+                            <div class="p-5">
+                                <h4 class="text-lg font-bold text-slate-900 mb-2" x-text="tour.title"></h4>
+                                <p class="text-sm text-gray-600 mb-4" x-text="tour.description.substring(0, 80) + '...'"></p>
+
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                                    <div class="flex items-center gap-1 text-yellow-500 text-sm">
+                                        ★★★★★ <span class="text-slate-400 ml-1">(4.9)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-red-600 font-bold text-lg" x-show="tour.price" x-text="tour.price"></span>
+                                        <span class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full transition">
+                                            Book Now
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </div>
 
     <!-- Dots -->
-    <div class="flex justify-center mt-4 gap-2">
+    <div class="flex justify-center mt-6 gap-2">
         <template x-for="(page, index) in pages" :key="index">
             <button @click="goTo(index)"
-                    class="w-3 h-3 rounded-full"
-                    :class="active === index ? 'bg-red-500' : 'bg-gray-300'"></button>
+                    class="w-3 h-3 rounded-full transition"
+                    :class="active === index ? 'bg-red-500 w-6' : 'bg-gray-300'"></button>
         </template>
     </div>
 </div>
@@ -291,6 +279,43 @@
 </div>
 
 <!-- 6. Top Destinations -->
+@php
+    $defaultDestinations = [
+        (object) [
+            'title'       => 'Mount Kilimanjaro',
+            'slug'        => 'mount-kilimanjaro',
+            'description' => 'The Roof of Africa — a bucket-list trek for adventurers seeking the ultimate summit.',
+            'image'       => 'assets/images/bg/1.jpg',
+            'is_default'  => true,
+        ],
+        (object) [
+            'title'       => 'Mount Meru Trek',
+            'slug'        => 'mount-meru-trek',
+            'description' => 'A stunning warm-up climb with dramatic views of Kilimanjaro and Arusha National Park.',
+            'image'       => 'assets/images/bg/2.jpg',
+            'is_default'  => true,
+        ],
+        (object) [
+            'title'       => 'Zanzibar Beaches',
+            'slug'        => 'zanzibar-beaches',
+            'description' => 'Turquoise waters, powder-white sand, and rich Swahili culture on the spice island.',
+            'image'       => 'assets/images/bg/3.jpg',
+            'is_default'  => true,
+        ],
+        (object) [
+            'title'       => 'Nungwi Beach',
+            'slug'        => 'nungwi-beach',
+            'description' => 'Zanzibar’s most vibrant beach — perfect for sunsets, dhow cruises, and snorkeling.',
+            'image'       => 'assets/images/bg/4.jpg',
+            'is_default'  => true,
+        ],
+    ];
+
+    $destinationList = (isset($destinations) && count($destinations) > 0)
+        ? $destinations
+        : $defaultDestinations;
+@endphp
+
 <section class="relative bg-gray-50 md:py-24 py-16 overflow-hidden">
     <div class="container relative">
         <div class="grid grid-cols-1 pb-8">
@@ -300,18 +325,16 @@
                         Top Destinations
                     </h3>
                     <p class="text-slate-400 max-w-xl mx-auto">
-                        Planning for a trip? We will organize your trip with the best places and within best budget!
+                        Trek the highest peaks or unwind on the finest beaches — pick your adventure.
                     </p>
                 </div>
 
                 <div class="hidden md:flex items-center gap-x-3 flex-shrink-0">
-                    <!-- Left Arrow -->
                     <button onclick="scrollLeft()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
                             <polyline points="15 18 9 12 15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
-                    <!-- Right Arrow -->
                     <button onclick="scrollRight()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
                             <polyline points="9 18 15 12 9 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -321,16 +344,37 @@
             </div>
         </div>
 
-        <!-- Marquee Scroll Container -->
-        <div class="overflow-hidden mt-6" id="marqueeContainer">
-            <div class="flex gap-6 transition-all duration-300 ease-in-out overflow-x-auto scroll-smooth" id="marqueeContent">
-                @foreach ($destinations as $destination)
-                    <div class="min-w-[300px] max-w-sm bg-white rounded-lg overflow-hidden shadow-md border border-red-500 flex-shrink-0">
-                        <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->title }}" class="w-full h-48 object-cover">
+        {{-- Grid on desktop (all 4 visible), horizontal scroll on mobile --}}
+        <div class="mt-6">
+            <div class="flex gap-6 overflow-x-auto scroll-smooth pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible"
+                 id="marqueeContent">
+                @foreach ($destinationList as $destination)
+                    @php
+                        $isDefault = !empty($destination->is_default);
+                        $imgSrc    = $isDefault ? asset($destination->image) : asset('storage/' . $destination->image);
+                        $detailUrl = $isDefault ? '#' : route('destination-detail', $destination->slug);
+
+                        $title = strtolower($destination->title);
+                        if (str_contains($title, 'beach') || str_contains($title, 'zanzibar') || str_contains($title, 'nungwi')) {
+                            $badge = 'Beach';
+                            $badgeColor = 'bg-cyan-500';
+                        } else {
+                            $badge = 'Trekking';
+                            $badgeColor = 'bg-emerald-600';
+                        }
+                    @endphp
+
+                    <div class="min-w-[300px] lg:min-w-0 w-full bg-white rounded-lg overflow-hidden shadow-md border border-red-500 flex-shrink-0 lg:flex-shrink">
+                        <div class="relative">
+                            <img src="{{ $imgSrc }}" alt="{{ $destination->title }}" class="w-full h-48 object-cover">
+                            <span class="absolute top-3 left-3 {{ $badgeColor }} text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                {{ $badge }}
+                            </span>
+                        </div>
                         <div class="p-4">
                             <h4 class="text-lg font-semibold text-red-600">{{ $destination->title }}</h4>
                             <p class="text-sm text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($destination->description, 80) }}</p>
-                            <a href="{{ route('destination-detail', $destination->slug) }}" class=" p-2 relative top-1.5 bg-black rounded-3xl text-white">View Details</a>
+                            <a href="{{ $detailUrl }}" class="p-2 relative top-1.5 bg-black rounded-3xl text-white">View Details</a>
                         </div>
                     </div>
                 @endforeach
@@ -338,7 +382,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- 7. Reviews -->
 <section class="relative md:py-24 py-16 overflow-hidden">
@@ -353,10 +396,9 @@
         </div>
     </div>
 </div>
-
+</section>
 
 @endsection
-
 
 
 <script>
@@ -366,9 +408,8 @@
             autoplayTimer: null,
             slides: [
                 {
-                    image: "{{ asset('assets/images/bisech002.jpg') }}", // Use clean filename
+                    image: "{{ asset('assets/images/bisech002.jpg') }}",
                 },
-               
             ],
             init() {
                 this.preloadImages();
@@ -401,56 +442,13 @@
     }
 </script>
 
-
-
-
-
-
-
-
 @push('scripts')
 <script>
     function tourSlider() {
         return {
             active: 0,
             pages: [],
-            tours: [
-                {
-                    id: 1,
-                    title: 'Serengeti Safari',
-                    description: 'Experience wildlife like never before in Serengeti.',
-                    slug: 'serengeti-safari',
-                    image: 'serengeti.jpg'
-                },
-                {
-                    id: 2,
-                    title: 'Zanzibar Beach',
-                    description: 'Relax at the turquoise beaches of Zanzibar.',
-                    slug: 'zanzibar-beach',
-                    image: 'zanzibar.jpg'
-                },
-                {
-                    id: 3,
-                    title: 'Mount Kilimanjaro',
-                    description: 'Climb Africa’s highest peak with expert guides.',
-                    slug: 'kilimanjaro',
-                    image: 'kilimanjaro.jpg'
-                },
-                {
-                    id: 4,
-                    title: 'Ngorongoro Crater',
-                    description: 'Explore the world’s largest volcanic caldera.',
-                    slug: 'ngorongoro',
-                    image: 'ngorongoro.jpg'
-                },
-                {
-                    id: 5,
-                    title: 'Lake Manyara',
-                    description: 'See tree-climbing lions and pink flamingos.',
-                    slug: 'lake-manyara',
-                    image: 'manyara.jpg'
-                },
-            ],
+            tours: @json($tourList),
 
             chunkArray(array, size) {
                 const chunks = [];
@@ -462,118 +460,41 @@
 
             startAutoSlide() {
                 this.pages = this.chunkArray(this.tours, 3);
+                if (this.pages.length === 0) return;
                 setInterval(() => {
                     this.next();
                 }, 6000);
             },
 
             next() {
+                if (this.pages.length === 0) return;
                 this.active = (this.active + 1) % this.pages.length;
             },
 
             prev() {
+                if (this.pages.length === 0) return;
                 this.active = (this.active - 1 + this.pages.length) % this.pages.length;
+            },
+
+            goTo(index) {
+                if (index >= 0 && index < this.pages.length) {
+                    this.active = index;
+                }
             }
         };
     }
 </script>
 @endpush
 
-
-
-
-
-
+{{-- Destinations horizontal scroll — ONLY on mobile/tablet. On desktop the grid handles layout --}}
 <script>
     function scrollLeft() {
         const container = document.getElementById('marqueeContent');
-        container.scrollLeft -= 300;
+        if (container) container.scrollLeft -= 320;
     }
 
     function scrollRight() {
         const container = document.getElementById('marqueeContent');
-        container.scrollLeft += 300;
+        if (container) container.scrollLeft += 320;
     }
 </script>
-
-
-  <script>
-        let currentTranslate = 0;
-        const cardWidth = 320 + 24; // card width + gap
-        const totalCards = 7;
-        const maxTranslate = -(cardWidth * (totalCards - 3)); // Show 3 cards at a time
-        
-        function scrollLeft() {
-            const marqueeContent = document.getElementById('marqueeContent');
-            currentTranslate = Math.min(currentTranslate + cardWidth, 0);
-            marqueeContent.style.transform = `translateX(${currentTranslate}px)`;
-            marqueeContent.style.animation = 'none';
-        }
-        
-        function scrollRight() {
-            const marqueeContent = document.getElementById('marqueeContent');
-            currentTranslate = Math.max(currentTranslate - cardWidth, maxTranslate);
-            marqueeContent.style.transform = `translateX(${currentTranslate}px)`;
-            marqueeContent.style.animation = 'none';
-        }
-        
-        // Reset auto-scroll when user stops interacting
-        let resetTimeout;
-        function resetAutoScroll() {
-            clearTimeout(resetTimeout);
-            resetTimeout = setTimeout(() => {
-                const marqueeContent = document.getElementById('marqueeContent');
-                marqueeContent.style.animation = 'scroll 20s linear infinite';
-                currentTranslate = 0;
-                marqueeContent.style.transform = 'translateX(0)';
-            }, 5000);
-        }
-        
-        // Add event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('button[onclick]').forEach(button => {
-                button.addEventListener('click', resetAutoScroll);
-            });
-        });
-    </script>
-
-      <script>
-        let packagesCurrentTranslate = 0;
-        const packagesCardWidth = 320 + 24; // card width + gap
-        const packagesTotalCards = 6;
-        const packagesMaxTranslate = -(packagesCardWidth * (packagesTotalCards - 3)); // Show 3 cards at a time
-        
-        function scrollPackagesLeft() {
-            const marqueeContent = document.getElementById('packagesMarqueeContent');
-            packagesCurrentTranslate = Math.min(packagesCurrentTranslate + packagesCardWidth, 0);
-            marqueeContent.style.transform = `translateX(${packagesCurrentTranslate}px)`;
-            marqueeContent.style.animation = 'none';
-        }
-        
-        function scrollPackagesRight() {
-            const marqueeContent = document.getElementById('packagesMarqueeContent');
-            packagesCurrentTranslate = Math.max(packagesCurrentTranslate - packagesCardWidth, packagesMaxTranslate);
-            marqueeContent.style.transform = `translateX(${packagesCurrentTranslate}px)`;
-            marqueeContent.style.animation = 'none';
-        }
-        
-        // Reset auto-scroll when user stops interacting
-        let packagesResetTimeout;
-        function resetPackagesAutoScroll() {
-            clearTimeout(packagesResetTimeout);
-            packagesResetTimeout = setTimeout(() => {
-                const marqueeContent = document.getElementById('packagesMarqueeContent');
-                marqueeContent.style.animation = 'packagesScroll 25s linear infinite';
-                packagesCurrentTranslate = 0;
-                marqueeContent.style.transform = 'translateX(0)';
-            }, 5000);
-        }
-        
-        // Add event listeners for packages
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('button[onclick^="scrollPackages"]').forEach(button => {
-                button.addEventListener('click', resetPackagesAutoScroll);
-            });
-        });
-    </script>
- 
