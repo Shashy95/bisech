@@ -1,99 +1,17 @@
-<!-- resources/views/contact.blade.php -->
-@extends('layouts.main')
-
-@section('title', 'Contact Us | ' . config('site.name'))
-
+@extends('layouts.brand-page')
+@section('title', 'Contact Bisech | Plan a Tanzania Trip')
+@section('description', 'Contact Bisech about safaris, tours, mountain climbing, coastal holidays, car hire, airport transfers, flights or corporate transport.')
 @section('content')
-
-@include('includes.navbar3')
-        
-<!-- Google Map -->
-<div class="container-fluid relative mt-20">
-    <div class="grid grid-cols-1">
-        <div class="w-full leading-[0] border-0">
-            <iframe src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{ urlencode(config('site.map_query')) }}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
-             style="border:0" class="w-full h-[500px]" allowfullscreen></iframe>
-        </div>
-    </div><!--end grid-->
-</div><!--end container-->
-<!-- Google Map -->
-
-<!-- Start Section-->
-<section class="relative lg:py-24 py-16">
-    <div class="container">
-        <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
-            <div class="lg:col-span-7 md:col-span-6">
-                <img src="{{ asset('assets/images/travel-train-station.svg') }}" class="w-full max-w-[500px] mx-auto" alt="">
-            </div>
-
-            <div class="lg:col-span-5 md:col-span-6">
-                <div class="lg:ms-5">
-                    <div class="bg-white dark:bg-slate-900 rounded-md shadow-sm dark:shadow-gray-800 p-6">
-                        <h3 class="mb-6 text-2xl leading-normal font-semibold">Get in touch</h3>
-
-                       <form method="POST" action="{{ route('contact.send') }}" name="myForm" id="myForm" onsubmit="return validateForm()">
-                            @csrf
-                            <p class="mb-0" id="error-msg"></p>
-                            <div id="simple-msg"></div>
-                            <div class="grid lg:grid-cols-12 grid-cols-1 gap-3">
-                                <div class="lg:col-span-12">
-                                    <label for="name" class="font-semibold">Name</label>
-                                    <input name="name" id="name" type="text"
-                                        class="mt-2 w-full py-2 px-3 h-10 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
-                                        placeholder="Your name">
-                                </div>
-
-                                <div class="lg:col-span-12">
-                                    <label for="email" class="font-semibold">Email</label>
-                                    <input name="email" id="email" type="email"
-                                        class="mt-2 w-full py-2 px-3 h-10 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
-                                       placeholder="you@example.com">
-                                </div>
-
-                               
-
-                                <div class="lg:col-span-12">
-                                    <label for="subject" class="font-semibold">Subject</label>
-                                    <input name="subject" id="subject" type="text"
-                                        class="mt-2 w-full py-2 px-3 h-10 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
-                                        placeholder="e.g. Kilimanjaro trek in March" value="{{ request('ref') ? 'Quote request: ' . request('ref') : '' }}">
-                                </div>
-
-                                <div class="lg:col-span-12">
-                                    <label for="comments" class="font-semibold">Message</label>
-                                    <textarea name="comments" id="comments"
-                                        class="mt-2 w-full py-2 px-3 h-28 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
-                                        placeholder="Type your message here..."></textarea>
-                                </div>
-                            </div>
-
-                                <button type="submit" id="submit" name="send"
-                                    class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-red-500 text-white rounded-md mt-2">
-                                    Send Message
-                                </button>
-                                @if (\App\Support\Site::hasWhatsapp())
-                                <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I have a question about a trip.') }}" target="_blank" rel="noopener"
-                                   class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-green-500 hover:bg-green-600 text-white rounded-md mt-2 ms-2">
-                                    Chat on WhatsApp
-                                </a>
-                                @endif
-                            </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!--end container-->
-    
-    <div class="container lg:mt-24 mt-16">
-        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
-
-            <!-- includes/Contact/contacts.blade.php -->
-            @include('includes.Contact.contacts')
-
-        </div><!--end grid-->
-    </div><!--end container-->
-</section><!--end section-->
-<!-- End Section-->
-
+<section class="bp-hero" style="background-image:url('{{ asset('assets/images/slide/Bisech011.jpg') }}')"><div class="bp-shell bp-hero-in"><p class="bp-kicker">Get in touch</p><h1>Tell us what you’re planning.</h1><p>Have travel dates, a destination in mind or a transport requirement? Send a few details and we can start a conversation.</p></div></section>
+<section class="bp-section"><div class="bp-shell bp-two" style="align-items:start"><div><p class="bp-kicker">Contact Bisech</p><h2 class="bp-title">A few details help us point you in the right direction.</h2><p class="bp-copy">Use the form to tell us what you need. You can also message us directly if that is easier.</p><div style="margin-top:28px"><h3 style="font-size:22px;color:var(--forest)">Useful details to include</h3><ul class="bp-list"><li>Travel dates or preferred period</li><li>Number of travellers or passengers</li><li>Destination, route or service required</li><li>Any preferences or questions</li></ul></div>@if(\App\Support\Site::hasWhatsapp())<a class="bp-btn alt" href="{{ \App\Support\Site::wa('Hello Bisech, I would like to make an enquiry.') }}" target="_blank" rel="noopener">Message on WhatsApp ↗</a>@endif
+@if(config('site.email'))<p class="bp-copy" style="margin-top:18px"><strong>Email:</strong> <a href="mailto:{{ config('site.email') }}">{{ config('site.email') }}</a></p>@endif
+@if(config('site.phone'))<p class="bp-copy"><strong>Phone:</strong> <a href="{{ \App\Support\Site::telHref() }}">{{ config('site.phone') }}</a></p>@endif
+</div><div><form class="bp-form" method="POST" action="{{ route('contact.send') }}">@csrf
+@if(session('success'))<div style="padding:14px;background:#e4f4e8;color:#205b34;margin-bottom:18px">{{ session('success') }}</div>@endif
+@if($errors->any())<div style="padding:14px;background:#fff0ed;color:#913f2a;margin-bottom:18px">{{ $errors->first() }}</div>@endif
+<label for="name">Your name</label><input id="name" name="name" value="{{ old('name') }}" required autocomplete="name">
+<label for="email">Email address</label><input id="email" name="email" type="email" value="{{ old('email') }}" required autocomplete="email">
+<label for="subject">What is your enquiry about?</label><input id="subject" name="subject" value="{{ old('subject', request('ref') ? 'Enquiry: '.request('ref') : '') }}" required placeholder="e.g. Safari, airport transfer, car hire">
+<label for="comments">Message</label><textarea id="comments" name="comments" required placeholder="Dates, number of people, destination or other details">{{ old('comments') }}</textarea>
+<button class="bp-btn" type="submit" style="border:0;cursor:pointer">Send enquiry ↗</button></form></div></div></section>
 @endsection

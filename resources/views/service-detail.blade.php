@@ -1,0 +1,13 @@
+@extends('layouts.brand-page')
+@section('title', $service['title'].' | '.config('site.name'))
+@section('description', $service['intro'])
+@section('content')
+<section class="bp-hero" style="background-image:url('{{ asset($service['image']) }}')"><div class="bp-shell bp-hero-in"><p class="bp-kicker">{{ $service['eyebrow'] }}</p><h1>{{ $service['title'] }}</h1><p>{{ $service['intro'] }}</p></div></section>
+<section class="bp-section"><div class="bp-shell bp-two"><div><p class="bp-kicker">How we can help</p><h2 class="bp-title">A practical plan, shaped around your needs.</h2><p class="bp-copy">Every enquiry starts with your requirements. We’ll discuss the details, clarify the options available and share the next steps before you decide how to proceed.</p><ul class="bp-list">@foreach($service['details'] as $detail)<li>{{ $detail }}</li>@endforeach</ul></div><div><img class="bp-photo" src="{{ asset($service['image']) }}" alt="{{ $service['title'] }} in Tanzania" loading="lazy"></div></div></section>
+<section class="bp-section" style="background:var(--sand)"><div class="bp-shell"><div class="bp-cta"><div><p class="bp-kicker">Start with an enquiry</p><h2>Tell us what you need.</h2><p class="bp-copy">{{ $service['note'] }}</p></div><a class="bp-btn alt" href="{{ \App\Support\Site::wa('Hello Bisech, I would like to enquire about '.$service['title'].'. Please help me understand the available options.') }}" @if(\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif>Enquire about this service ↗</a></div></div></section>
+<section class="bp-section"><div class="bp-shell"><p class="bp-kicker">Other services</p><h2 class="bp-title">Need help with another part of the journey?</h2><div class="bp-grid">
+@foreach([['Safaris & tours','safaris-and-tours','assets/images/slide/bisech005.jpg'],['Car hire & transport','car-hire-and-transport','assets/images/slide/Bisech 008.jpeg.jpg'],['Airport transfers','airport-transfers','assets/images/slide/Bisech011.jpg'],['Flight bookings','flight-bookings','assets/images/slide/Bisech012.webp'],['Mountain climbing','mountain-climbing','assets/images/slide/Bisech 006.webp'],['Zanzibar & coast','zanzibar-and-coastal-holidays','assets/images/listing/5.jpg'],['Cargo & corporate transport','cargo-and-corporate-transport','assets/images/slide/Bisech010.jpg']] as $item)
+@if($item[1] !== $slug)<article class="bp-card"><img src="{{ asset($item[2]) }}" alt="{{ $item[0] }}" loading="lazy"><div class="bp-card-body"><h3>{{ $item[0] }}</h3><a href="{{ route('services.show',$item[1]) }}">View service ↗</a></div></article>@endif
+@endforeach
+</div></div></section>
+@endsection

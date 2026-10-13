@@ -35,7 +35,13 @@
         <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
             <!-- Main Content -->
             <div class="lg:col-span-8 md:col-span-7">
-                <img src="{{ asset('storage/' . $tour->image) }}" class="w-full rounded-md shadow-sm object-cover mb-6" alt="{{ $tour->title }}" />
+                <img
+                src="{{ $tour->image && \Illuminate\Support\Str::startsWith($tour->image, 'assets/')
+                    ? asset($tour->image)
+                    : asset('storage/' . $tour->image) }}"
+                class="w-full rounded-md shadow-sm object-cover mb-6"
+                alt="{{ $tour->title }}"
+            />
 
                 <h5 class="text-2xl font-semibold">{{ $tour->title }}</h5>
                 <p class="text-slate-400 mt-4">{{ $tour->paragraph }}</p>

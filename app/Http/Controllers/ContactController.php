@@ -11,55 +11,36 @@ class ContactController extends Controller
 {
     public function show()
     {
-        return view('emails.contact');
+        return redirect()->route('contact');
     }
 
     public function send(Request $request)
     {
-        try {
-            // Validation logic
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email',
-                'subject' => 'required|string|max:255',
-                'comments' => 'required|string',
-            ]);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'comments' => 'required|string|max:10000',
+        ]);
 
-            // Prepare email data
-            $data = $request->only(['name', 'email', 'subject', 'comments']);
-            
-            // Send email
-            Mail::raw('Name: ' . $data['name'] . "\n" . 
-                    'Email: ' . $data['email'] . "\n" . 
-                    'Subject: ' . $data['subject'] . "\n" . 
-                    'Message: ' . $data['comments'], 
+        try {
+            Mail::raw(
+                'Name: ' . $data['name'] . "\n" .
+                'Email: ' . $data['email'] . "\n" .
+                'Subject: ' . $data['subject'] . "\n" .
+                'Message: ' . $data['comments'],
                 function ($message) use ($data) {
                     $message->to(config('site.inbox_email') ?: config('mail.from.address'))
-                            ->subject($data['subject']);
+                        ->replyTo($data['email'], $data['name'])
+                        ->subject($data['subject']);
                 }
             );
 
-            // Return raw HTML for success
-            $successMessage = "
-                <fieldset>
-                    <div id='success_page'>
-                        <h3>Email Sent Successfully.</h3>
-                        <p>Thank you <strong>" . e($data['name']) . "</strong>, your message has been sent. We will reply as soon as we can.</p>
-                    </div>
-                </fieldset>
-            ";
+            return redirect()->route('contact')->with('success', 'Thank you. Your enquiry has been sent. We will get back to you as soon as possible.');
+        } catch (\Throwable $e) {
+            Log::error('Bisech contact form failed: ' . $e->getMessage());
 
-            return response()->json([
-                'message' => $successMessage,
-            ]);
-            
-
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json([
-                'success' => false,
-                'message' => 'Something went wrong. Please try again later.',
-            ], 500);
+            return back()->withInput()->withErrors(['contact' => 'We could not send your message right now. Please try again or contact us through WhatsApp.']);
         }
     }
 }

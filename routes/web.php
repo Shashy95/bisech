@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\DestinationController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/services/{slug}', [HomeController::class, 'serviceDetail'])->name('services.show');
+Route::get('/packages/{slug}', [HomeController::class, 'packageDetail'])->name('packages.show');
 
 // Tour Detail Pages
 // (/tour-packages/{slug} removed: its view 'tour.show' does not exist and returned a 500)

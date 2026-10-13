@@ -19,7 +19,7 @@ class TourController extends Controller
   public function showDetailTwo($slug)
 {
     $tour = Tour::where('slug', $slug)->firstOrFail();
-    return view('tour-detail-one', compact('tour'));
+    return view('package-detail', compact('tour'));
 }
     public function create()
     {

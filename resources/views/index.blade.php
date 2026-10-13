@@ -1,462 +1,226 @@
 @extends('layouts.main')
 
+@section('title', config('site.title'))
+
 @push('styles')
 <style>
-
-    .slide-transition {
-        transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .slide-bg {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    #packagesMarqueeContent {
-        animation: packagesScroll 25s linear infinite;
-    }
-
-    #packagesMarqueeContent:hover {
-        animation-play-state: paused;
-    }
-
-    @keyframes packagesScroll {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(calc(-100% - 1.5rem));
-        }
-    }
+    :root { --bisech-forest:#173b32; --bisech-deep:#102b25; --bisech-clay:#c66a45; --bisech-sand:#f6f2e9; --bisech-ink:#202b27; }
+    body { background:#fff; color:var(--bisech-ink); }
+    .bisech-home { overflow:hidden; font-family:inherit; }
+    .bisech-home * { box-sizing:border-box; }
+    .bisech-shell { width:min(1180px, calc(100% - 44px)); margin-inline:auto; }
+    .bisech-nav { position:relative; z-index:30; background:#fff; border-bottom:1px solid #e9e7df; }
+    .bisech-nav-inner { min-height:86px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .bisech-brand { display:flex; align-items:center; gap:12px; color:var(--bisech-forest); text-decoration:none; }
+    .bisech-brand img { width:52px; height:52px; object-fit:contain; border-radius:50%; }
+    .bisech-brand-name { font-size:21px; font-weight:800; letter-spacing:.08em; line-height:1; }
+    .bisech-brand-sub { display:block; margin-top:6px; color:#6d7971; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+    .bisech-nav-links { display:flex; align-items:center; gap:30px; }
+    .bisech-nav-links a { color:#36443d; text-decoration:none; font-size:14px; font-weight:600; }
+    .bisech-nav-links a:hover { color:var(--bisech-clay); }
+    .bisech-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 21px; border-radius:3px; background:var(--bisech-forest); color:white!important; text-decoration:none!important; font-weight:700; font-size:14px; transition:transform .2s,background .2s; }
+    .bisech-btn:hover { background:var(--bisech-deep); transform:translateY(-2px); }
+    .bisech-btn-clay { background:var(--bisech-clay); }
+    .bisech-btn-clay:hover { background:#ad5838; }
+    .bisech-hero { min-height:650px; position:relative; display:flex; align-items:center; color:#fff; background:#19372e url('{{ asset('assets/images/Bisech003.webp') }}') center 47%/cover no-repeat; }
+    .bisech-hero:before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,31,25,.82) 0%,rgba(10,31,25,.58) 48%,rgba(10,31,25,.12) 100%); }
+    .bisech-hero-inner { position:relative; z-index:1; padding-block:88px 100px; }
+    .bisech-eyebrow { display:flex; align-items:center; gap:12px; margin:0 0 20px; font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    .bisech-eyebrow:before { content:''; width:34px; height:2px; background:var(--bisech-clay); }
+    .bisech-hero h1 { max-width:760px; margin:0; font-family:Georgia,'Times New Roman',serif; font-size:clamp(42px,6vw,76px); font-weight:500; letter-spacing:-.035em; line-height:1.04; color:#fff; }
+    .bisech-hero h1 em { color:#e9b28d; font-weight:400; }
+    .bisech-hero-copy { max-width:550px; margin:24px 0 30px; color:rgba(255,255,255,.88); font-size:17px; line-height:1.8; }
+    .bisech-hero-actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .bisech-btn-outline { border:1px solid rgba(255,255,255,.7); background:rgba(255,255,255,.08); }
+    .bisech-hero-note { display:flex; flex-wrap:wrap; gap:22px; margin-top:48px; color:rgba(255,255,255,.85); font-size:12px; font-weight:600; }
+    .bisech-hero-note span:before { content:'•'; color:#e9b28d; margin-right:9px; font-size:16px; }
+    .bisech-intro { display:grid; grid-template-columns:1.05fr .95fr; gap:80px; align-items:center; padding-block:105px; }
+    .bisech-section-kicker { margin:0 0 15px; color:var(--bisech-clay); font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+    .bisech-title { margin:0; color:var(--bisech-forest); font-family:Georgia,'Times New Roman',serif; font-size:clamp(34px,4vw,52px); font-weight:500; letter-spacing:-.03em; line-height:1.12; }
+    .bisech-copy { color:#65716a; font-size:15px; line-height:1.9; }
+    .bisech-intro-photo { position:relative; min-height:450px; }
+    .bisech-intro-photo img { position:absolute; width:82%; height:390px; object-fit:cover; top:0; right:0; border-radius:2px; }
+    .bisech-intro-photo:after { content:''; position:absolute; left:0; bottom:0; width:52%; height:230px; border:9px solid #fff; background:url('{{ asset('assets/images/slide/Bisech 004.jpeg.jpg') }}') center/cover; box-shadow:0 15px 40px #152e251f; }
+    .bisech-photo-caption { position:absolute; right:0; bottom:-12px; z-index:2; background:var(--bisech-sand); padding:14px 18px; color:var(--bisech-forest); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .bisech-services { padding-block:85px 95px; background:var(--bisech-sand); }
+    .bisech-section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:38px; }
+    .bisech-section-head .bisech-copy { max-width:390px; margin:0; }
+    .bisech-service-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .bisech-service { display:block; padding:26px 23px 28px; min-height:220px; background:#fff; border:1px solid #eae5d9; text-decoration:none!important; transition:transform .2s,box-shadow .2s; }
+    .bisech-service:hover { transform:translateY(-4px); box-shadow:0 15px 30px #1b3b3014; }
+    .bisech-service-num { display:block; margin-bottom:32px; color:var(--bisech-clay); font-family:Georgia,serif; font-size:24px; }
+    .bisech-service h3 { margin:0 0 10px; color:var(--bisech-forest); font-family:Georgia,serif; font-size:22px; font-weight:500; }
+    .bisech-service p { margin:0; color:#6d7770; font-size:13px; line-height:1.8; }
+    .bisech-trips { padding-block:100px; }
+    .bisech-trip-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+    .bisech-trip { background:white; border:1px solid #e8e8e1; text-decoration:none!important; color:inherit!important; display:flex; flex-direction:column; min-width:0; transition:transform .2s,box-shadow .2s; }
+    .bisech-trip:hover { transform:translateY(-4px); box-shadow:0 18px 38px #1b3b3018; }
+    .bisech-trip-image { height:245px; overflow:hidden; background:#e9e6dc; }
+    .bisech-trip-image img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .bisech-trip:hover .bisech-trip-image img { transform:scale(1.04); }
+    .bisech-trip-body { padding:23px; }
+    .bisech-trip-label { color:var(--bisech-clay); font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .bisech-trip h3 { margin:9px 0 10px; color:var(--bisech-forest); font-family:Georgia,serif; font-size:25px; font-weight:500; line-height:1.2; }
+    .bisech-trip p { margin:0; color:#69746d; font-size:13px; line-height:1.8; }
+    .bisech-trip-link { display:inline-block; margin-top:19px; color:var(--bisech-forest); font-size:12px; font-weight:800; letter-spacing:.04em; }
+    .bisech-trip-link span { color:var(--bisech-clay); margin-left:7px; }
+    .bisech-destinations { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .bisech-destination { min-height:340px; position:relative; display:flex; align-items:end; overflow:hidden; background:#173b32; text-decoration:none!important; }
+    .bisech-destination img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .bisech-destination:hover img { transform:scale(1.04); }
+    .bisech-destination:after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,rgba(9,28,22,.85),rgba(9,28,22,0) 78%); }
+    .bisech-destination-text { position:relative; z-index:1; padding:28px; color:#fff; }
+    .bisech-destination-text small { display:block; margin-bottom:8px; color:#edb28e; font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .bisech-destination-text h3 { margin:0 0 8px; color:#fff; font-family:Georgia,serif; font-size:32px; font-weight:500; }
+    .bisech-destination-text p { max-width:420px; margin:0; color:#f0f2ee; font-size:13px; line-height:1.7; }
+    .bisech-process { margin-block:100px; padding:65px; display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; background:var(--bisech-forest); color:#fff; }
+    .bisech-process .bisech-title { color:#fff; }
+    .bisech-process .bisech-copy { color:#d0dbd4; }
+    .bisech-steps { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+    .bisech-step { border-top:1px solid #587166; padding-top:17px; }
+    .bisech-step strong { color:#e9b28d; font-family:Georgia,serif; font-size:24px; font-weight:400; }
+    .bisech-step h3 { margin:12px 0 7px; color:white; font-size:15px; font-weight:700; }
+    .bisech-step p { margin:0; color:#d0dbd4; font-size:13px; line-height:1.8; }
+    .bisech-final-cta { margin-bottom:90px; padding:52px 58px; display:flex; justify-content:space-between; align-items:center; gap:30px; background:#f1e5d7; }
+    .bisech-final-cta h2 { max-width:620px; margin:0; color:var(--bisech-forest); font-family:Georgia,serif; font-size:clamp(30px,3.5vw,44px); font-weight:500; line-height:1.15; }
+    .bisech-final-cta p { margin:12px 0 0; color:#68736b; font-size:14px; }
+    @media(max-width:900px) { .bisech-nav-links { gap:16px; } .bisech-intro { gap:38px; } .bisech-service-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .bisech-trip-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .bisech-process { padding:40px; gap:35px; } }
+    @media(max-width:640px) { .bisech-shell { width:min(100% - 32px,1180px); } .bisech-nav-inner { min-height:76px; } .bisech-brand img { width:42px;height:42px; } .bisech-brand-name { font-size:18px; } .bisech-nav-links a:not(.bisech-btn) { display:none; } .bisech-nav-links { gap:0; } .bisech-nav-links .bisech-btn { min-height:42px;padding:0 13px;font-size:12px; } .bisech-hero { min-height:600px;background-position:58% center; } .bisech-hero-inner { padding-block:75px 68px; } .bisech-hero-copy { font-size:15px; } .bisech-hero-note { gap:10px 18px;margin-top:35px; } .bisech-intro { grid-template-columns:1fr; padding-block:70px; gap:38px; } .bisech-intro-photo { min-height:350px; } .bisech-intro-photo img { width:85%;height:300px; } .bisech-intro-photo:after { height:165px; } .bisech-photo-caption { bottom:-4px;font-size:10px; } .bisech-services,.bisech-trips { padding-block:70px; } .bisech-section-head { display:block; } .bisech-section-head .bisech-copy { margin-top:16px; } .bisech-service-grid,.bisech-trip-grid { grid-template-columns:1fr; } .bisech-service { min-height:unset; } .bisech-service-num { margin-bottom:18px; } .bisech-trip-image { height:235px; } .bisech-destinations { grid-template-columns:1fr; } .bisech-destination { min-height:290px; } .bisech-process { margin-block:70px;padding:30px 24px;grid-template-columns:1fr;gap:30px; } .bisech-steps { gap:22px; } .bisech-final-cta { margin-bottom:60px;padding:32px 24px;display:block; } .bisech-final-cta .bisech-btn { margin-top:22px; } }
 </style>
 @endpush
 
-@section('title', config('site.title'))
-
 @section('content')
+<div class="bisech-home">
+    <header class="bisech-nav">
+        <div class="bisech-shell bisech-nav-inner">
+            <a href="{{ url('/') }}" class="bisech-brand" aria-label="Bisech home">
+                <img src="{{ asset('assets/images/logo.jpg') }}" alt="Bisech logo">
+                <span><span class="bisech-brand-name">BISECH</span><span class="bisech-brand-sub">Travel · Tanzania</span></span>
+            </a>
+            <nav class="bisech-nav-links" aria-label="Main navigation">
+                <a href="#experiences">Experiences</a>
+                <a href="#destinations">Destinations</a>
+                <a href="{{ route('about') }}">About</a>
+                <a href="{{ route('contact') }}">Contact</a>
+                <a class="bisech-btn" href="{{ \App\Support\Site::wa('Hello Bisech, I would like help planning a trip in Tanzania.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif>Plan your trip <span aria-hidden="true">↗</span></a>
+            </nav>
+        </div>
+    </header>
 
-@include('includes.navbar')
+    <section class="bisech-hero">
+        <div class="bisech-shell bisech-hero-inner">
+            <p class="bisech-eyebrow">Discover Tanzania with Bisech</p>
+            <h1>Wild places.<br>Real moments.<br><em>Your kind of journey.</em></h1>
+            <p class="bisech-hero-copy">From a first light game drive on the savannah to quiet days by the Indian Ocean, we help you shape a Tanzania trip around the way you want to travel.</p>
+            <div class="bisech-hero-actions">
+                <a class="bisech-btn bisech-btn-clay" href="{{ \App\Support\Site::wa('Hello Bisech, I would like to plan a Tanzania trip. My dates are not confirmed yet.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif>Start planning <span aria-hidden="true">↗</span></a>
+                <a class="bisech-btn bisech-btn-outline" href="#experiences">Explore experiences <span aria-hidden="true">↓</span></a>
+            </div>
+            <div class="bisech-hero-note"><span>Wildlife safaris</span><span>Mountain journeys</span><span>Coastal escapes</span></div>
+        </div>
+    </section>
 
-<!-- 1. Hero Section -->
-<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[520px] md:min-h-[680px] overflow-hidden">
+    <section class="bisech-shell bisech-intro">
+        <div>
+            <p class="bisech-section-kicker">Travel at your own pace</p>
+            <h2 class="bisech-title">Tanzania is more than a destination. It’s a feeling.</h2>
+            <p class="bisech-copy">The best trips leave room for the unexpected: the elephants crossing the track, a guide sharing a story, the last light over the hills. Bisech helps bring the details together, so your journey feels considered rather than rushed.</p>
+            <p class="bisech-copy">Tell us what you have in mind, when you want to travel and who is coming. We’ll help you explore the options and put together a plan that fits.</p>
+            <a class="bisech-btn" href="{{ route('about') }}">Get to know Bisech <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="bisech-intro-photo" aria-label="Tanzania wildlife and landscapes">
+            <img src="{{ asset('assets/images/Bisech010 (1).jpg') }}" alt="Zebras on the Tanzanian savannah" loading="lazy">
+            <span class="bisech-photo-caption">The beauty is in the details</span>
+        </div>
+    </section>
 
-    <template x-for="(slide, index) in slides" :key="index">
-        <div :class="{
-                'opacity-100 pointer-events-auto z-10': activeSlide === index,
-                'opacity-0 pointer-events-none z-0': activeSlide !== index
-            }"
-            class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out">
-            <div class="relative h-full w-full flex items-center justify-center bg-cover bg-center"
-                :style="`background-image: url('${slide.image}')`">
-                <div class="absolute inset-0 bg-slate-900/40"></div>
+    <section class="bisech-services" id="experiences">
+        <div class="bisech-shell">
+            <div class="bisech-section-head">
+                <div><p class="bisech-section-kicker">Ways to explore</p><h2 class="bisech-title">A journey that feels like yours.</h2></div>
+                <p class="bisech-copy">Choose one experience or bring a few together. We can help you work out the route, timing and practical details.</p>
+            </div>
+            <div class="bisech-service-grid">
+                <a class="bisech-service" href="{{ route('services.show', 'safaris-and-tours') }}"><span class="bisech-service-num">01 / LAND</span><h3>Safaris & tours</h3><p>Explore Tanzania’s wildlife areas, landscapes and cultural experiences.</p><span class="bisech-trip-link">Explore service ↗</span></a>
+                <a class="bisech-service" href="{{ route('services.show', 'mountain-climbing') }}"><span class="bisech-service-num">02 / CLIMB</span><h3>Mountain climbing</h3><p>Discuss Kilimanjaro routes, timing and preparation for your journey.</p><span class="bisech-trip-link">Explore service ↗</span></a>
+                <a class="bisech-service" href="{{ route('services.show', 'zanzibar-and-coastal-holidays') }}"><span class="bisech-service-num">03 / COAST</span><h3>Zanzibar & coast</h3><p>Plan island time, coastal stays and connections with a wider trip.</p><span class="bisech-trip-link">Explore service ↗</span></a>
+                <a class="bisech-service" href="{{ route('services.show', 'car-hire-and-transport') }}"><span class="bisech-service-num">04 / DRIVE</span><h3>Car hire & transport</h3><p>Ask about driver options, airport transfers and longer journeys.</p><span class="bisech-trip-link">Explore service ↗</span></a>
+                <a class="bisech-service" href="{{ route('services.show', 'flight-bookings') }}"><span class="bisech-service-num">05 / FLY</span><h3>Flight assistance</h3><p>Discuss domestic connections and flight arrangements for your dates.</p><span class="bisech-trip-link">Explore service ↗</span></a>
+                <a class="bisech-service" href="{{ route('services.show', 'cargo-and-corporate-transport') }}"><span class="bisech-service-num">06 / BUSINESS</span><h3>Corporate & cargo</h3><p>Make an enquiry about business transport or cargo-related needs.</p><span class="bisech-trip-link">Explore service ↗</span></a>
             </div>
         </div>
-    </template>
+    </section>
 
-    <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
-        <div class="max-w-3xl">
-            <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight">Safaris, Car Hire &amp; Flights in Tanzania</h1>
-            <p class="mt-4 text-base md:text-lg text-white/90">Tell us your dates and budget. We plan the trip and send you a clear quote.</p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like a quote for a trip.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif
-                   class="py-3 px-6 rounded-md bg-red-500 hover:bg-red-600 text-white font-semibold">{{ \App\Support\Site::hasWhatsapp() ? 'Get a Quote on WhatsApp' : 'Get a Quote' }}</a>
-                <a href="#packages" class="py-3 px-6 rounded-md bg-white/90 hover:bg-white text-slate-900 font-semibold">See Tour Packages</a>
-            </div>
+    @php
+        $liveTours = isset($tours) ? collect($tours) : collect();
+        $fallbackTours = [
+            ['title' => 'Serengeti & the Northern Circuit', 'label' => 'Wildlife safari', 'description' => 'Build a safari around open plains, wildlife viewing and the parks that interest you most.', 'image' => 'assets/images/slide/bisech005.jpg'],
+            ['title' => 'Kilimanjaro & the Highlands', 'label' => 'Mountain journey', 'description' => 'Explore trekking routes, preparation and timing for a climb in the Kilimanjaro region.', 'image' => 'assets/images/slide/Bisech 006.webp'],
+            ['title' => 'Zanzibar & the Coast', 'label' => 'Coastal escape', 'description' => 'Pair time by the Indian Ocean with local culture and the kind of pace you prefer.', 'image' => 'assets/images/listing/5.jpg'],
+        ];
+    @endphp
+    <section class="bisech-shell bisech-trips" id="trips">
+        <div class="bisech-section-head">
+            <div><p class="bisech-section-kicker">A few places to begin</p><h2 class="bisech-title">Find your starting point.</h2></div>
+            <p class="bisech-copy">These are ideas, not fixed itineraries. Tell us your dates and we can discuss what makes sense for your trip.</p>
         </div>
-    </div>
+        <div class="bisech-trip-grid">
+            @if ($liveTours->isNotEmpty())
+                @foreach ($liveTours->take(6) as $tour)
+                    <a class="bisech-trip" href="{{ route('packages.show', $tour->slug) }}">
+                        <div class="bisech-trip-image">
+                                    @php
+                                        $tourImage = $tour->image ?? null;
 
-    <button @click="prevSlide()" x-show="slides.length > 1" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
-        <i class="mdi mdi-chevron-left text-4xl"></i>
-    </button>
-    <button @click="nextSlide()" x-show="slides.length > 1" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
-        <i class="mdi mdi-chevron-right text-4xl"></i>
-    </button>
-</section>
+                                        $imageUrl = $tourImage
+                                            ? (\Illuminate\Support\Str::startsWith($tourImage, 'assets/')
+                                                ? asset($tourImage)
+                                                : asset('storage/' . ltrim($tourImage, '/')))
+                                            : asset('assets/images/slide/Bisech003.webp');
+                                    @endphp
 
-<!-- 3. Our Services -->
-<section class="relative md:mt-16 mt-8 bg-white">
-    <div class="container mx-auto pt-12 pb-16 px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-                What We Can Arrange for You
-            </h2>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            @php
-                $services = [
-                    ['title' => 'Car Hire',            'desc' => 'From budget cars to luxury SUVs and 4x4s for off-road, perfect for any travel purpose.', 'image' => '1.jpg'],
-                    ['title' => 'Tourism Management',  'desc' => 'From itinerary design to bookings & experiences, we offer end-to-end tourism solutions.',  'image' => '2.jpg'],
-                    ['title' => 'Air Ticketing',       'desc' => 'Book, cancel, or reschedule domestic & international flights at competitive rates.',      'image' => '3.jpg'],
-                    ['title' => 'Mountain Climbing',   'desc' => 'Join our guided adventures to breathtaking peaks — safe, fun, and unforgettable.',        'image' => '4.jpg'],
-                    ['title' => 'Beach Holiday',       'desc' => 'Serene beaches, luxury stays, water sports — we tailor the perfect coastal experience.',   'image' => '5.jpg'],
-                    ['title' => 'Custom Packages',     'desc' => 'Tell us your dream — we’ll design the experience: solo, family, or corporate group.',      'image' => '6.jpg'],
-                ];
-            @endphp
-
-            @foreach ($services as $service)
-                <div class="bg-white border border-red-500 rounded-lg shadow hover:shadow-lg transition p-6 text-center">
-                    <img src="{{ asset('assets/images/blog/' . $service['image']) }}"
-                         alt="{{ $service['title'] }}"
-                         class="w-20 h-20 rounded-full mx-auto object-cover mb-4 border-4 border-white shadow-md">
-                    <h3 class="text-xl font-semibold text-red-500 dark:text-white mb-2">
-                        {{ $service['title'] }}
-                    </h3>
-                    <p class="text-black text-sm">
-                        {{ $service['desc'] }}
-                    </p>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- 4. Tour Packages -->
-@php
-    $defaultTours = [
-        ['id' => 1, 'title' => 'Serengeti Safari',     'slug' => 'serengeti-safari',  'description' => 'Experience wildlife like never before in Serengeti.', 'image' => 'assets/images/listing/1.jpg',  'price' => '$450',   'days' => '3 Days', 'tag' => 'Wildlife'],
-        ['id' => 2, 'title' => 'Zanzibar Beach Escape','slug' => 'zanzibar-beach',    'description' => 'Relax at the turquoise beaches of Zanzibar.',         'image' => 'assets/images/listing/2.jpg',  'price' => '$320',   'days' => '4 Days', 'tag' => 'Beach'],
-        ['id' => 3, 'title' => 'Mount Kilimanjaro Trek','slug' => 'kilimanjaro',      'description' => 'Climb Africa’s highest peak with expert guides.',     'image' => 'assets/images/listing/3.jpg',  'price' => '$1,200', 'days' => '7 Days', 'tag' => 'Adventure'],
-        ['id' => 4, 'title' => 'Ngorongoro Crater Tour','slug' => 'ngorongoro',      'description' => 'Explore the world’s largest volcanic caldera.',       'image' => 'assets/images/listing/4.jpg',  'price' => '$380',   'days' => '2 Days', 'tag' => 'Safari'],
-        ['id' => 5, 'title' => 'Lake Manyara Day Trip', 'slug' => 'lake-manyara',     'description' => 'See tree-climbing lions and pink flamingos.',         'image' => 'assets/images/listing/5.jpg',  'price' => '$180',   'days' => '1 Day',  'tag' => 'Day Trip'],
-        ['id' => 6, 'title' => 'Tarangire Safari',      'slug' => 'tarangire-safari', 'description' => 'Giant baobabs and the largest elephant herds.',       'image' => 'assets/images/listing/6.jpg',  'price' => '$260',   'days' => '2 Days', 'tag' => 'Safari'],
-    ];
-
-    if (isset($tourPackages) && count($tourPackages) > 0) {
-        $tourList = collect($tourPackages)->map(function ($t) {
-            return [
-                'id'          => $t->id,
-                'title'       => $t->title,
-                'slug'        => $t->slug,
-                'description' => $t->description,
-                'image'       => 'storage/' . $t->image,
-                'price'       => $t->price    ?? null,
-                'days'        => $t->days     ?? null,
-                'tag'         => $t->category ?? 'Tour',
-            ];
-        })->values()->all();
-    } else {
-        $tourList = $defaultTours;
-    }
-@endphp
-
-<div id="packages" class="container relative md:mt-24 mt-16" x-data="tourSlider()" x-init="startAutoSlide()">
-    <div class="grid grid-cols-1 pb-8">
-        <div class="flex items-center justify-between">
-            <div class="text-center w-full">
-                <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Tour Packages</h3>
-                <p class="text-slate-400 max-w-xl mx-auto">
-                    Sample trips to start from. Prices are per person; tell us your dates and group size for a firm quote.
-                </p>
-            </div>
-
-            <div class="hidden md:flex items-center gap-x-3 flex-shrink-0 z-10 relative">
-                <button @click="prev()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
-                        <polyline points="15 18 9 12 15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-
-                <button @click="next()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
-                        <polyline points="9 18 15 12 9 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slider -->
-    <div class="relative overflow-hidden mt-6">
-        <div class="flex transition-all duration-700 ease-in-out"
-             :style="`transform: translateX(-${active * 100}%); width: ${pages.length * 100}%`">
-            <template x-for="(page, pageIndex) in pages" :key="pageIndex">
-                <div class="w-full flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-                    <template x-for="tour in page" :key="tour.id">
-                        <a :href="quoteHref(tour)" :target="isWa ? '_blank' : '_self'" rel="noopener"
-                           class="block bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-
-                            <div class="relative">
-                                <img :src="'/' + tour.image"
-                                     class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                                     :alt="tour.title">
-                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full"
-                                      x-text="tour.tag"></span>
-                                <span x-show="tour.days"
-                                      class="absolute top-3 right-3 bg-black/70 text-white text-xs font-medium px-3 py-1 rounded-full"
-                                      x-text="tour.days"></span>
+                                    <img
+                                        src="{{ $imageUrl }}"
+                                        alt="{{ $tour->title }}"
+                                        loading="lazy"
+                                        onerror="this.onerror=null; this.src='{{ asset('assets/images/slide/Bisech003.webp') }}';"
+                                    >
                             </div>
-
-                            <div class="p-5">
-                                <h4 class="text-lg font-bold text-slate-900 mb-2" x-text="tour.title"></h4>
-                                <p class="text-sm text-gray-600 mb-4" x-text="tour.description.length > 80 ? tour.description.substring(0, 80).trim() + '…' : tour.description"></p>
-
-                                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                    <div class="text-sm text-slate-500" x-show="tour.price">From</div>
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-red-600 font-bold text-lg" x-show="tour.price" x-text="tour.price"></span>
-                                        <span class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full transition">
-                                            Get a Quote
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </template>
-                </div>
-            </template>
-        </div>
-    </div>
-
-    <!-- Dots -->
-    <div class="flex justify-center mt-6 gap-2">
-        <template x-for="(page, index) in pages" :key="index">
-            <button @click="goTo(index)"
-                    class="w-3 h-3 rounded-full transition"
-                    :class="active === index ? 'bg-red-500 w-6' : 'bg-gray-300'"></button>
-        </template>
-    </div>
-</div>
-
-<!-- 5. About Us -->
-<div class="container relative md:mt-24 mt-16 pb-5">
-    @include('includes.Hero.about')
-</div>
-
-<!-- 6. Top Destinations -->
-@php
-    $defaultDestinations = [
-        (object) [
-            'title'       => 'Mount Kilimanjaro',
-            'slug'        => 'mount-kilimanjaro',
-            'description' => 'The Roof of Africa: a guided trek to the top of Tanzania.',
-            'image'       => 'assets/images/bg/1.jpg',
-            'is_default'  => true,
-        ],
-        (object) [
-            'title'       => 'Mount Meru Trek',
-            'slug'        => 'mount-meru-trek',
-            'description' => 'A shorter climb with big views of Kilimanjaro. Good as a first trek.',
-            'image'       => 'assets/images/bg/2.jpg',
-            'is_default'  => true,
-        ],
-        (object) [
-            'title'       => 'Zanzibar Beaches',
-            'slug'        => 'zanzibar-beaches',
-            'description' => 'White sand, clear water and Swahili culture, with stays arranged.',
-            'image'       => 'assets/images/bg/3.jpg',
-            'is_default'  => true,
-        ],
-        (object) [
-            'title'       => 'Nungwi Beach',
-            'slug'        => 'nungwi-beach',
-            'description' => 'Zanzibar\'s liveliest beach for sunsets, dhow cruises and snorkelling.',
-            'image'       => 'assets/images/bg/4.jpg',
-            'is_default'  => true,
-        ],
-    ];
-
-    $destinationList = (isset($destinations) && count($destinations) > 0)
-        ? $destinations
-        : $defaultDestinations;
-@endphp
-
-<section class="relative bg-gray-50 md:py-24 py-16 overflow-hidden">
-    <div class="container relative">
-        <div class="grid grid-cols-1 pb-8">
-            <div class="flex items-center justify-between">
-                <div class="text-center w-full">
-                    <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">
-                        Top Destinations
-                    </h3>
-                    <p class="text-slate-400 max-w-xl mx-auto">
-                        Trek the highest peaks or unwind on the finest beaches — pick your adventure.
-                    </p>
-                </div>
-
-                <div class="hidden md:flex items-center gap-x-3 flex-shrink-0">
-                    <button onclick="scrollLeft()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
-                            <polyline points="15 18 9 12 15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                    <button onclick="scrollRight()" class="h-10 w-10 flex items-center justify-center rounded-full border border-gray-400 bg-white hover:bg-gray-100 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#828282">
-                            <polyline points="9 18 15 12 9 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        {{-- Grid on desktop (all 4 visible), horizontal scroll on mobile --}}
-        <div class="mt-6">
-            <div class="flex gap-6 overflow-x-auto scroll-smooth pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible"
-                 id="marqueeContent">
-                @foreach ($destinationList as $destination)
-                    @php
-                        $isDefault = !empty($destination->is_default);
-                        $imgSrc    = $isDefault ? asset($destination->image) : asset('storage/' . $destination->image);
-                        $detailUrl = $isDefault ? \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like details about: ' . $destination->title) : route('destination-detail', $destination->slug);
-
-                        $title = strtolower($destination->title);
-                        if (str_contains($title, 'beach') || str_contains($title, 'zanzibar') || str_contains($title, 'nungwi')) {
-                            $badge = 'Beach';
-                            $badgeColor = 'bg-cyan-500';
-                        } else {
-                            $badge = 'Trekking';
-                            $badgeColor = 'bg-emerald-600';
-                        }
-                    @endphp
-
-                    <div class="min-w-[300px] lg:min-w-0 w-full bg-white rounded-lg overflow-hidden shadow-md border border-red-500 flex-shrink-0 lg:flex-shrink">
-                        <div class="relative">
-                            <img src="{{ $imgSrc }}" alt="{{ $destination->title }}" class="w-full h-48 object-cover">
-                            <span class="absolute top-3 left-3 {{ $badgeColor }} text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                {{ $badge }}
-                            </span>
-                        </div>
-                        <div class="p-4">
-                            <h4 class="text-lg font-semibold text-red-600">{{ $destination->title }}</h4>
-                            <p class="text-sm text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($destination->description, 80) }}</p>
-                            <a href="{{ $detailUrl }}" @if ($isDefault && \App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif class="p-2 px-4 relative top-1.5 bg-black rounded-3xl text-white inline-block">{{ $isDefault ? 'Ask About This Trip' : 'View Details' }}</a>
-                        </div>
-                    </div>
+                        <div class="bisech-trip-body"><span class="bisech-trip-label">Explore with Bisech</span><h3>{{ $tour->title }}</h3><p>{{ \Illuminate\Support\Str::limit($tour->description ?: $tour->paragraph ?: 'Talk to us about shaping this experience around your dates and interests.', 145) }}</p><span class="bisech-trip-link">Ask about this trip <span>↗</span></span></div>
+                    </a>
                 @endforeach
-            </div>
+            @else
+                @foreach ($fallbackTours as $trip)
+                    <a class="bisech-trip" href="{{ \App\Support\Site::wa('Hello Bisech, please help me plan: ' . $trip['title'] . '.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif>
+                        <div class="bisech-trip-image"><img src="{{ asset($trip['image']) }}" alt="{{ $trip['title'] }}" loading="lazy"></div>
+                        <div class="bisech-trip-body"><span class="bisech-trip-label">{{ $trip['label'] }}</span><h3>{{ $trip['title'] }}</h3><p>{{ $trip['description'] }}</p><span class="bisech-trip-link">Ask about this trip <span>↗</span></span></div>
+                    </a>
+                @endforeach
+            @endif
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- 7. How booking works -->
-<section class="relative md:py-24 py-16 overflow-hidden">
-<div class="container relative">
-    <div class="grid grid-cols-1 pb-5 text-center">
-        <h3 class="mb-6 md:text-3xl text-2xl font-semibold">How Booking Works</h3>
-        <p class="text-slate-400 max-w-xl mx-auto">Three simple steps from first message to departure.</p>
-    </div>
-    <div class="grid md:grid-cols-3 grid-cols-1 gap-8 mt-6">
-        @foreach ([
-            ['1', 'Tell us where and when', 'Send your dates, group size and budget on WhatsApp or the contact form.'],
-            ['2', 'Get a clear quote', 'You see the full price and what is included before you pay anything.'],
-            ['3', 'Travel with support', 'We arrange the vehicle, flights and stays, and stay reachable throughout your trip.'],
-        ] as [$n, $title, $text])
-            <div class="text-center px-6">
-                <div class="size-14 mx-auto rounded-full bg-red-500 text-white text-xl font-bold flex items-center justify-center">{{ $n }}</div>
-                <h5 class="mt-5 text-lg font-semibold">{{ $title }}</h5>
-                <p class="text-slate-400 mt-3">{{ $text }}</p>
-            </div>
-        @endforeach
-    </div>
+    <section class="bisech-shell" id="destinations">
+        <div class="bisech-section-head"><div><p class="bisech-section-kicker">From savannah to sea</p><h2 class="bisech-title">Two sides of Tanzania.<br>Countless ways to see it.</h2></div><p class="bisech-copy">Start with the landscape that calls to you, then we can help you decide what to combine it with.</p></div>
+        <div class="bisech-destinations">
+            <a class="bisech-destination" href="{{ \App\Support\Site::wa('Hello Bisech, I am interested in a Tanzania wildlife safari.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif><img src="{{ asset('assets/images/slide/Bisech003.webp') }}" alt="Elephants in Tanzania with Mount Kilimanjaro in the distance" loading="lazy"><span class="bisech-destination-text"><small>Wild Tanzania</small><h3>Into the wild</h3><p>Wildlife, wide horizons and days shaped around the rhythm of the bush.</p></span></a>
+            <a class="bisech-destination" href="{{ \App\Support\Site::wa('Hello Bisech, I am interested in a Zanzibar or Tanzania coast holiday.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif><img src="{{ asset('assets/images/listing/5.jpg') }}" alt="Traditional dhow on a tropical beach" loading="lazy"><span class="bisech-destination-text"><small>Indian Ocean</small><h3>Find your coast</h3><p>Warm water, coastal flavours and time to take the day as it comes.</p></span></a>
+        </div>
+    </section>
+
+    <section class="bisech-shell bisech-process">
+        <div><p class="bisech-section-kicker">Simple from the start</p><h2 class="bisech-title">Good trips begin with a conversation.</h2><p class="bisech-copy">You don’t need every detail figured out before you reach us. Start with an idea and we’ll work through the practical bits together.</p><a class="bisech-btn bisech-btn-clay" href="{{ \App\Support\Site::wa('Hello Bisech, I would like to discuss a trip to Tanzania.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif>Talk through your plans <span aria-hidden="true">↗</span></a></div>
+        <div class="bisech-steps">
+            <div class="bisech-step"><strong>01</strong><h3>Share your idea</h3><p>Let us know when you hope to travel, how many people are coming and what you enjoy.</p></div>
+            <div class="bisech-step"><strong>02</strong><h3>Shape the route</h3><p>We discuss destinations, timing and the arrangements that suit your plans.</p></div>
+            <div class="bisech-step"><strong>03</strong><h3>Review the details</h3><p>Get a clear proposal to review before you decide how to proceed.</p></div>
+            <div class="bisech-step"><strong>04</strong><h3>Get ready to go</h3><p>Once details are agreed, confirm the arrangements and prepare for your trip.</p></div>
+        </div>
+    </section>
+
+    <section class="bisech-shell bisech-final-cta">
+        <div><h2>Have a place in mind, or just a feeling?</h2><p>Tell Bisech a little about the trip you want to take. We’ll start from there.</p></div>
+        <a class="bisech-btn" href="{{ \App\Support\Site::wa('Hello Bisech, I would like help planning a trip. Here is what I have in mind:') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif>Let’s plan it <span aria-hidden="true">↗</span></a>
+    </section>
 </div>
-</section>
-
 @endsection
-
-
-<script>
-    function heroSlider() {
-        return {
-            activeSlide: 0,
-            autoplayTimer: null,
-            slides: [
-                {
-                    image: "{{ asset('assets/images/bisech002.jpg') }}",
-                },
-            ],
-            init() {
-                this.preloadImages();
-            },
-            preloadImages() {
-                this.slides.forEach(slide => {
-                    const img = new Image();
-                    img.src = slide.image;
-                });
-            },
-            startAutoplay() {
-                this.stopAutoplay();
-                this.autoplayTimer = setInterval(() => {
-                    this.nextSlide();
-                }, 5000);
-            },
-            stopAutoplay() {
-                clearInterval(this.autoplayTimer);
-                this.autoplayTimer = null;
-            },
-            nextSlide() {
-                if (this.slides.length === 0) return;
-                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-            },
-            prevSlide() {
-                if (this.slides.length === 0) return;
-                this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
-            }
-        };
-    }
-</script>
-
-@push('scripts')
-<script>
-    function tourSlider() {
-        return {
-            active: 0,
-            pages: [],
-            tours: @json($tourList),
-            waBase: @json(\App\Support\Site::waBase()),
-            isWa: @json(\App\Support\Site::hasWhatsapp()),
-            quoteHref(tour) {
-                const msg = this.isWa
-                    ? 'Hello {{ config('site.name') }}, I would like a quote for: ' + tour.title
-                    : tour.title;
-                return this.waBase + encodeURIComponent(msg);
-            },
-
-            chunkArray(array, size) {
-                const chunks = [];
-                for (let i = 0; i < array.length; i += size) {
-                    chunks.push(array.slice(i, i + size));
-                }
-                return chunks;
-            },
-
-            startAutoSlide() {
-                this.pages = this.chunkArray(this.tours, 3);
-                if (this.pages.length === 0) return;
-                setInterval(() => {
-                    this.next();
-                }, 6000);
-            },
-
-            next() {
-                if (this.pages.length === 0) return;
-                this.active = (this.active + 1) % this.pages.length;
-            },
-
-            prev() {
-                if (this.pages.length === 0) return;
-                this.active = (this.active - 1 + this.pages.length) % this.pages.length;
-            },
-
-            goTo(index) {
-                if (index >= 0 && index < this.pages.length) {
-                    this.active = index;
-                }
-            }
-        };
-    }
-</script>
-@endpush
-
-{{-- Destinations horizontal scroll — ONLY on mobile/tablet. On desktop the grid handles layout --}}
-<script>
-    function scrollLeft() {
-        const container = document.getElementById('marqueeContent');
-        if (container) container.scrollLeft -= 320;
-    }
-
-    function scrollRight() {
-        const container = document.getElementById('marqueeContent');
-        if (container) container.scrollLeft += 320;
-    }
-</script>

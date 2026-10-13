@@ -11,12 +11,12 @@
         <title>{{ $pageTitle }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="{{ $pageDesc }}">
-        <meta name="theme-color" content="#ef4444">
+        <meta name="theme-color" content="#173b32">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="{{ config('site.name') }}">
         <meta property="og:title" content="{{ $pageTitle }}">
         <meta property="og:description" content="{{ $pageDesc }}">
-        <meta property="og:image" content="{{ asset('assets/images/bisech002.jpg') }}">
+        <meta property="og:image" content="{{ asset('assets/images/Bisech003.webp') }}">
         @if (config('site.demo'))
             <meta name="robots" content="noindex, nofollow">
         @endif
@@ -79,19 +79,7 @@
         --}}
         <!-- LTR & RTL Mode Code -->
 
-        <!-- WhatsApp -->
-        @if (\App\Support\Site::hasWhatsapp())
-        <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like to ask about a trip.') }}" target="_blank" rel="noopener"
-           class="fixed bottom-5 end-5 z-20 inline-flex items-center gap-2 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold shadow-lg py-3 px-4"
-           aria-label="Chat on WhatsApp">
-            <i class="mdi mdi-whatsapp text-2xl leading-none"></i>
-            <span class="hidden sm:inline">Chat on WhatsApp</span>
-        </a>
-        @endif
-
-        <!-- Back to top -->
-        <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top fixed hidden text-lg rounded-md z-10 bottom-24 end-5 size-8 text-center bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white justify-center items-center"><i class="mdi mdi-arrow-up"></i></a>
-        <!-- Back to top --> 
+ 
 
         <!-- JAVASCRIPTS -->
         <script src="{{ asset('assets/libs/swiper/js/swiper.min.js') }}"></script>
