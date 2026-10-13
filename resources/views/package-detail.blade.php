@@ -1,4 +1,3 @@
-```blade
 @extends('layouts.brand-page')
 
 @section('title', $tour->title.' | Trip idea | '.config('site.name'))
@@ -149,4 +148,4 @@
 </section>
 
 @endsection
-```
+
