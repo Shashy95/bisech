@@ -1,34 +1,31 @@
 @php
+use App\Support\Site;
 $contacts = [
     [
-        'icon' => 'phone', 
+        'icon' => 'phone',
         'name' => 'Call Us',
         'title' => 'Reach us directly during business hours.',
-        'info' => '+255 718 420 969',
-        'link' => 'tel:+255718420969',
-        'type' => '',
+        'info' => e(Site::phone()),
+        'link' => Site::telHref(),
         'style' => '',
     ],
     [
-        'icon' => 'mail', 
+        'icon' => 'mail',
         'name' => 'Send Us a Message',
         'title' => 'Send us your questions or feedback anytime.',
-        'info' => 'info@bisech.co.tz',
-        'link' => 'mailto:info@bisech.co.tz',
-        'type' => '',
+        'info' => e(Site::email()),
+        'link' => Site::mailHref(),
         'style' => '',
     ],
-   [
-        'icon' => 'map-pin', 
+    [
+        'icon' => 'map-pin',
         'name' => 'Our Address',
-        'title' => 'Visit our office at the heart of Dar es Salaam.',
-        'info' => "DERM Plaza, 7th Floor<br>Makumbusho,<br>Dar es Salaam, Tanzania.",
-        'link' => '#',
-        'type' => '',
+        'title' => 'Visit our office in Dar es Salaam.',
+        'info' => nl2br(e(Site::address())),
+        'link' => null,
         'style' => '',
-    ]
+    ],
 ];
-
 @endphp
 
 @foreach ($contacts as $item)
@@ -44,8 +41,11 @@ $contacts = [
             <p class="text-slate-400 mt-3">{{ $item['title'] }}</p>
             
             <div class="mt-5">
-                <a href="{{ $item['link'] }}"
-                data-type="{{ $item['type'] }}" class="{{ $item['style'] }} text-red-500 font-medium">  {!! $item['info'] !!}</a>
+                @if ($item['link'])
+                <a href="{{ $item['link'] }}" class="{{ $item['style'] }} text-red-500 font-medium">{!! $item['info'] !!}</a>
+                @else
+                <span class="text-red-500 font-medium">{!! $item['info'] !!}</span>
+                @endif
             </div>
         </div>
     </div>

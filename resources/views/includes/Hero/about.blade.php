@@ -9,8 +9,8 @@
                     <i data-feather="users" class="size-6"></i>
                 </div>
                 <div class="flex-1">
-                    <span class="text-slate-400">Visitor</span>
-                    <p class="text-xl font-bold"><span class="counter-value" data-target="4589">2100</span></p>
+                    <span class="text-slate-400">Car hire · Tours · Flights</span>
+                    <p class="text-lg font-bold">One team, one quote</p>
                 </div>
             </div>
 
@@ -19,8 +19,8 @@
                     <i data-feather="globe" class="size-6"></i>
                 </div>
                 <div class="flex-1">
-                    <span class="text-slate-400">Travel Packages</span>
-                    <p class="text-xl font-bold"><span class="counter-value" data-target="50">1</span>+</p>
+                    <span class="text-slate-400">Based in Dar es Salaam</span>
+                    <p class="text-lg font-bold">Local team, local knowledge</p>
                 </div>
             </div>
         </div>
@@ -28,12 +28,11 @@
 
     <div class="md:col-span-7">
         <div class="lg:ms-8">
-            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">World Best Travel <br> Agency: Bisech</h3>
+            <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Your Tanzania <br> Travel Partner</h3>
 
             <p class="text-slate-400 max-w-xl mb-6">
-               Bisech Investments Co. Limited is a registered limited liability Company
-                incorporated in the United Republic of Tanzania under Companies, Ordinance (CAP 212) with Certificate of Registration No . 69057.
-                <br><br>The Company was formed due to the emerging opportunities in Car Hire and Tourism business responding to the development of Tourism sector and other Business sectors in the Country. 
+               {{ config('site.name') }} is a Tanzanian travel company covering car hire, flight booking and guided trips, from Kilimanjaro treks to Zanzibar beach stays.
+                <br><br>Tell us your dates, group size and budget. We plan the route, arrange the vehicle, flights and stays, and stay reachable while you travel.
             </p>
 
             <a href="{{ route('about') }}" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-red-500 text-white rounded-md">Read More <i class="mdi mdi-chevron-right align-middle ms-0.5"></i></a>

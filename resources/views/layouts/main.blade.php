@@ -1,17 +1,25 @@
-<!-- resources/views/layouts/main.blade.php -->
+@php
+    // Sections set via @section('title', '...') arrive HTML-escaped; decode once so {{ }} doesn't double-escape (&amp;amp;).
+    $pageTitle = html_entity_decode(trim($__env->yieldContent('title'))) ?: config('site.title');
+    $pageDesc  = html_entity_decode(trim($__env->yieldContent('description'))) ?: config('site.description');
+@endphp
 
 <!DOCTYPE html>
 <html lang="en" class="light scroll-smooth" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta content="Tour & Travels Agency Tailwind CSS Template" name="description">
-        <meta content="Tour, Travels, agency, business, corporate, tour packages, journey, trip, tailwind css, Admin, Landing" name="keywords">
-        <meta name="author" content="Shreethemes">
-        <meta name="website" content="https://shreethemes.in">
-        <meta name="email" content="support@shreethemes.in">
-        <meta name="version" content="1.5.0">
+        <title>{{ $pageTitle }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{{ $pageDesc }}">
+        <meta name="theme-color" content="#ef4444">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ config('site.name') }}">
+        <meta property="og:title" content="{{ $pageTitle }}">
+        <meta property="og:description" content="{{ $pageDesc }}">
+        <meta property="og:image" content="{{ asset('assets/images/bisech002.jpg') }}">
+        @if (config('site.demo'))
+            <meta name="robots" content="noindex, nofollow">
+        @endif
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -71,8 +79,18 @@
         --}}
         <!-- LTR & RTL Mode Code -->
 
+        <!-- WhatsApp -->
+        @if (\App\Support\Site::hasWhatsapp())
+        <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like to ask about a trip.') }}" target="_blank" rel="noopener"
+           class="fixed bottom-5 end-5 z-20 inline-flex items-center gap-2 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold shadow-lg py-3 px-4"
+           aria-label="Chat on WhatsApp">
+            <i class="mdi mdi-whatsapp text-2xl leading-none"></i>
+            <span class="hidden sm:inline">Chat on WhatsApp</span>
+        </a>
+        @endif
+
         <!-- Back to top -->
-        <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top fixed hidden text-lg rounded-md z-10 bottom-5 end-5 size-8 text-center bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white justify-center items-center"><i class="mdi mdi-arrow-up"></i></a>
+        <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top fixed hidden text-lg rounded-md z-10 bottom-24 end-5 size-8 text-center bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white justify-center items-center"><i class="mdi mdi-arrow-up"></i></a>
         <!-- Back to top --> 
 
         <!-- JAVASCRIPTS -->

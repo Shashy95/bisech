@@ -1,7 +1,7 @@
 <!-- resources/views/contact.blade.php -->
 @extends('layouts.main')
 
-@section('title', 'Contact Page')
+@section('title', 'Contact Us | ' . config('site.name'))
 
 @section('content')
 
@@ -11,7 +11,7 @@
 <div class="container-fluid relative mt-20">
     <div class="grid grid-cols-1">
         <div class="w-full leading-[0] border-0">
-            <iframe src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=bisech%20tour+(bisech%20tour)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
+            <iframe src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{ urlencode(config('site.map_query')) }}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
              style="border:0" class="w-full h-[500px]" allowfullscreen></iframe>
         </div>
     </div><!--end grid-->
@@ -29,9 +29,10 @@
             <div class="lg:col-span-5 md:col-span-6">
                 <div class="lg:ms-5">
                     <div class="bg-white dark:bg-slate-900 rounded-md shadow-sm dark:shadow-gray-800 p-6">
-                        <h3 class="mb-6 text-2xl leading-normal font-semibold">Get in touch !</h3>
+                        <h3 class="mb-6 text-2xl leading-normal font-semibold">Get in touch</h3>
 
                        <form method="POST" action="{{ route('contact.send') }}" name="myForm" id="myForm" onsubmit="return validateForm()">
+                            @csrf
                             <p class="mb-0" id="error-msg"></p>
                             <div id="simple-msg"></div>
                             <div class="grid lg:grid-cols-12 grid-cols-1 gap-3">
@@ -39,17 +40,24 @@
                                     <label for="name" class="font-semibold">Name</label>
                                     <input name="name" id="name" type="text"
                                         class="mt-2 w-full py-2 px-3 h-10 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
-                                        placeholder="e.g. John Doe">
+                                        placeholder="Your name">
                                 </div>
 
                                 <div class="lg:col-span-12">
                                     <label for="email" class="font-semibold">Email</label>
                                     <input name="email" id="email" type="email"
                                         class="mt-2 w-full py-2 px-3 h-10 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
-                                       placeholder="e.g. john@example.com">
+                                       placeholder="you@example.com">
                                 </div>
 
                                
+
+                                <div class="lg:col-span-12">
+                                    <label for="subject" class="font-semibold">Subject</label>
+                                    <input name="subject" id="subject" type="text"
+                                        class="mt-2 w-full py-2 px-3 h-10 bg-transparent text-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
+                                        placeholder="e.g. Kilimanjaro trek in March" value="{{ request('ref') ? 'Quote request: ' . request('ref') : '' }}">
+                                </div>
 
                                 <div class="lg:col-span-12">
                                     <label for="comments" class="font-semibold">Message</label>
@@ -63,6 +71,12 @@
                                     class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-red-500 text-white rounded-md mt-2">
                                     Send Message
                                 </button>
+                                @if (\App\Support\Site::hasWhatsapp())
+                                <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I have a question about a trip.') }}" target="_blank" rel="noopener"
+                                   class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-green-500 hover:bg-green-600 text-white rounded-md mt-2 ms-2">
+                                    Chat on WhatsApp
+                                </a>
+                                @endif
                             </form>
 
                     </div>

@@ -34,7 +34,7 @@ class ContactController extends Controller
                     'Subject: ' . $data['subject'] . "\n" . 
                     'Message: ' . $data['comments'], 
                 function ($message) use ($data) {
-                    $message->to('your-email@gmail.com') // Replace with your email
+                    $message->to(config('site.inbox_email') ?: config('mail.from.address'))
                             ->subject($data['subject']);
                 }
             );
@@ -44,7 +44,7 @@ class ContactController extends Controller
                 <fieldset>
                     <div id='success_page'>
                         <h3>Email Sent Successfully.</h3>
-                        <p>Thank you <strong>{$data['name']}</strong>, your message has been submitted to us.</p>
+                        <p>Thank you <strong>" . e($data['name']) . "</strong>, your message has been sent. We will reply as soon as we can.</p>
                     </div>
                 </fieldset>
             ";

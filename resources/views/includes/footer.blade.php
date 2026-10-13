@@ -7,14 +7,16 @@
                     <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
                          
                         <div class="lg:col-span-3 md:col-span-12">
-                           <h5 class="tracking-[1px] text-gray-100 font-semibold">About Bistech</h5>
-                            <p class="mt-6 text-gray-300">Planning for a trip? We will organize your trip with the best places and within best budget!</p>
+                           <h5 class="tracking-[1px] text-gray-100 font-semibold">About {{ config('site.name') }}</h5>
+                            <p class="mt-6 text-gray-300">Safaris, beach holidays, car hire and flight booking in Tanzania, organised for your dates and your budget.</p>
+                            @php $socialIcons = ['facebook' => 'facebook', 'instagram' => 'instagram', 'twitter' => 'twitter', 'linkedin' => 'linkedin']; @endphp
+                            @if (count(\App\Support\Site::social()))
                             <ul class="list-none mt-6">
-                                <li class="inline"><a href="http://linkedin.com/" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 dark:border-gray-700 rounded-md hover:bg-red-500 hover:text-white text-slate-300"><i data-feather="linkedin" class="size-4 align-middle" title="Linkedin"></i></a></li>
-                                <li class="inline"><a href="https://facebook.com/bisechcompany-377483546232683/" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 dark:border-gray-700 rounded-md hover:bg-red-500 hover:text-white text-slate-300"><i data-feather="facebook" class="size-4 align-middle" title="facebook"></i></a></li>
-                                <li class="inline"><a href="https://www.instagram.com/bisechtour/" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 dark:border-gray-700 rounded-md hover:bg-red-500 hover:text-white text-slate-300"><i data-feather="instagram" class="size-4 align-middle" title="instagram"></i></a></li>
-                                <li class="inline"><a href="https://twitter.com/" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 dark:border-gray-700 rounded-md hover:bg-red-500 hover:text-white text-slate-300"><i data-feather="twitter" class="size-4 align-middle" title="twitter"></i></a></li>
+                                @foreach (\App\Support\Site::social() as $network => $url)
+                                <li class="inline"><a href="{{ $url }}" target="_blank" rel="noopener" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-800 dark:border-gray-700 rounded-md hover:bg-red-500 hover:text-white text-slate-300"><i data-feather="{{ $socialIcons[$network] ?? 'link' }}" class="size-4 align-middle" title="{{ $network }}"></i></a></li>
+                                @endforeach
                             </ul><!--end icon-->
+                            @endif
                         </div><!--end col-->
 
                         <div class="lg:col-span-3 md:col-span-4">
@@ -24,21 +26,29 @@
                                 <div class="flex mt-4">
                                     <i data-feather="map-pin" class="size-4 text-red-500 me-2 mt-1"></i>
                                     <div class="">
-                                        <h6 class="text-gray-300">DERM Plaza,7th Floor <br> Makumbusho, <br> Dar es Salaam, Tanzania</h6>
+                                        <h6 class="text-gray-300">{!! nl2br(e(\App\Support\Site::address())) !!}</h6>
                                     </div>
                                 </div>
 
                                 <div class="flex mt-4">
                                     <i data-feather="mail" class="size-4 text-red-500 me-2 mt-1"></i>
                                     <div class="">
-                                        <a href="mailto:info@bisech.co.tz" class="text-slate-300 hover:text-slate-400 duration-500 ease-in-out">info@bisech.co.tz</a>
+                                        @if (\App\Support\Site::mailHref())
+                                        <a href="{{ \App\Support\Site::mailHref() }}" class="text-slate-300 hover:text-slate-400 duration-500 ease-in-out">{{ \App\Support\Site::email() }}</a>
+                                        @else
+                                        <span class="text-slate-300">{{ \App\Support\Site::email() }}</span>
+                                        @endif
                                     </div>
                                 </div>
                 
                                 <div class="flex mt-4">
                                     <i data-feather="phone" class="size-4 text-red-500 me-2 mt-1"></i>
                                     <div class="">
-                                        <a href="tel:+255718420969" class="text-slate-300 hover:text-slate-400 duration-500 ease-in-out">+255 718 420 969</a>
+                                        @if (\App\Support\Site::telHref())
+                                        <a href="{{ \App\Support\Site::telHref() }}" class="text-slate-300 hover:text-slate-400 duration-500 ease-in-out">{{ \App\Support\Site::phone() }}</a>
+                                        @else
+                                        <span class="text-slate-300">{{ \App\Support\Site::phone() }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -49,8 +59,7 @@
                                 <h5 class="tracking-[1px] text-gray-100 font-semibold">Company</h5>
                                 <ul class="list-none footer-list mt-6">
                                     <li><a href="{{ url('/aboutus') }}" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="mdi mdi-chevron-right"></i> About us</a></li>
-                                    <li class="mt-[10px]"><a href="" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="mdi mdi-chevron-right"></i> Services</a></li>
-                                    <li class="mt-[10px]"><a href="" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="mdi mdi-chevron-right"></i> Team</a></li>
+                                    <li class="mt-[10px]"><a href="{{ url('/contact') }}" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="mdi mdi-chevron-right"></i> Contact us</a></li>
                                     {{--
                                     <li class="mt-[10px]"><a href="" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="mdi mdi-chevron-right"></i> Pricing</a></li>
                                     <li class="mt-[10px]"><a href="{{ url('/blogs') }}" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="mdi mdi-chevron-right"></i> Blog</a></li>
@@ -61,21 +70,12 @@
                         </div><!--end col-->
 
                         <div class="lg:col-span-3 md:col-span-4">
-                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Newsletter</h5>
-                            <p class="mt-6">Sign up and receive the latest tips via email.</p>
-                            <form>
-                                <div class="grid grid-cols-1">
-                                    <div class="my-3">
-                                        <label class="form-label">Write your email <span class="text-red-600">*</span></label>
-                                        <div class="form-icon relative mt-2">
-                                            <i data-feather="mail" class="size-4 absolute top-3 start-4"></i>
-                                            <input type="email" class="ps-12 rounded w-full py-2 px-3 h-10 bg-gray-800 dark:bg-gray-700 border-0 text-gray-100 focus:shadow-none focus:ring-0 placeholder:text-gray-200 outline-none" placeholder="Email" name="email" required="">
-                                        </div>
-                                    </div>
-                                
-                                    <button type="submit" id="submitsubscribe" name="send" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle duration-500 text-base text-center bg-red-500 text-white rounded-md">Subscribe</button>
-                                </div>
-                            </form>
+                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Plan your trip</h5>
+                            <p class="mt-6">Tell us your dates and group size. We reply with a clear quote.</p>
+                            <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like a quote for a trip.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif
+                               class="mt-4 py-2 px-5 inline-block font-semibold tracking-wide align-middle duration-500 text-base text-center bg-red-500 hover:bg-red-600 text-white rounded-md">
+                                {{ \App\Support\Site::hasWhatsapp() ? 'Get a quote on WhatsApp' : 'Get a quote' }}
+                            </a>
                         </div><!--end col-->
                     </div><!--end grid-->
                 </div><!--end col-->
@@ -87,7 +87,7 @@
         <div class="container relative text-center">
             <div class="grid grid-cols-1">
                 <div class="text-center">
-                    <p class="mb-0">© {{ date('Y') }} Bisech. Design & Develop with <i class="mdi mdi-heart text-red-600"></i> by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                    <p class="mb-0">© {{ date('Y') }} {{ config('site.name') }}. All rights reserved.@if (config('site.demo')) <span class="text-gray-400"> · Demo website</span>@endif</p>
                 </div>
             </div><!--end grid-->
         </div><!--end container-->

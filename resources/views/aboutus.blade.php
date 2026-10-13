@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'About Us Page')
+@section('title', 'About Us | ' . config('site.name'))
 
 @section('content')
 
@@ -11,13 +11,13 @@
     <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/80 to-slate-900"></div>
     <div class="container relative">
         <div class="grid grid-cols-1 pb-8 text-center mt-10">
-            <h3 class="text-4xl leading-normal tracking-wider font-semibold text-white">Bisech Agency</h3>
+            <h3 class="text-4xl leading-normal tracking-wider font-semibold text-white">{{ config('site.name') }}</h3>
         </div>
     </div>
     
     <div class="absolute text-center z-10 bottom-5 start-0 end-0 mx-3">
         <ul class="tracking-[0.5px] mb-0 inline-block">
-            <li class="inline-block uppercase text-[13px] font-bold text-white/50 hover:text-white"><a href="{{ url('/') }}">Bisech</a></li>
+            <li class="inline-block uppercase text-[13px] font-bold text-white/50 hover:text-white"><a href="{{ url('/') }}">{{ config('site.name') }}</a></li>
             <li class="inline-block text-base text-white/50 mx-0.5"><i class="mdi mdi-chevron-right"></i></li>
             <li class="inline-block uppercase text-[13px] font-bold text-white">About Us</li>
         </ul>
@@ -37,7 +37,7 @@
         <div class="grid grid-cols-1 text-center pb-10">
             <h3 class="mb-6 md:text-3xl text-2xl font-semibold">Our Mission & Vision</h3>
             <p class="text-slate-500 max-w-2xl mx-auto mb-12">
-                At Bisech Agency, we are driven by purpose and foresight to deliver exceptional travel experiences and long-lasting impact.
+                At {{ config('site.name') }}, we are driven by purpose and foresight to deliver exceptional travel experiences and long-lasting impact.
             </p>
         </div>
 
@@ -46,15 +46,7 @@
             <div class="bg-gray-100 dark:bg-slate-800 p-6 rounded-xl shadow-md">
                 <h4 class="text-xl font-bold text-red-600 mb-4">Our Mission</h4>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                   To deliver unparalleled car rental
-and travel experiences that delight
-our customers and create lasting
-memories. We strive to be the pre-
-mier choice by consistently provi-
-ding exceptional service, innovati-
-ve solutions, and remarkable expe-
-riences that inspire wonder and
-foster deep customer loyalty
+                   To deliver unparalleled car rental and travel experiences that delight our customers and create lasting memories. We strive to be the premier choice by consistently providing exceptional service, innovative solutions, and remarkable experiences that inspire wonder and foster deep customer loyalty.
                 </p>
             </div>
 
@@ -64,11 +56,7 @@ foster deep customer loyalty
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                  
 
-To be the premier provider of
-exceptional car rental and travel
-experiences that inspire wonder
-and create lifelong memories for
-our customers.
+To be the premier provider of exceptional car rental and travel experiences that inspire wonder and create lifelong memories for our customers.
                 </p>
             </div>
         </div>

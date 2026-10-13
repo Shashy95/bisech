@@ -32,14 +32,14 @@
 </style>
 @endpush
 
-@section('title', 'Index Page')
+@section('title', config('site.title'))
 
 @section('content')
 
 @include('includes.navbar')
 
 <!-- 1. Hero Section -->
-<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[750px] overflow-hidden">
+<section x-data="heroSlider()" x-init="init(); startAutoplay()" x-cloak class="relative w-full min-h-[520px] md:min-h-[680px] overflow-hidden">
 
     <template x-for="(slide, index) in slides" :key="index">
         <div :class="{
@@ -54,84 +54,32 @@
         </div>
     </template>
 
-    <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
-        <i class="mdi mdi-chevron-left text-4xl"></i>
-    </button>
-    <button @click="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
-        <i class="mdi mdi-chevron-right text-4xl"></i>
-    </button>
-</section>
-
-<!-- Floating Form - Between Hero and Next Section -->
-<div class="relative -mt-40 z-30 mb-16">
-    <div class="container mx-auto px-4">
-     <form class="p-8 bg-white dark:bg-slate-900 rounded-xl shadow-xl  border border-gray-200 dark:border-slate-800 max-w-7xl mx-auto">
-    <div class="registration-form text-slate-900 text-start">
-        <div class="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
-
-            <div>
-                <label class="form-label font-medium text-slate-900 dark:text-white">Search:</label>
-                <div class="relative mt-2">
-                    <i data-feather="search" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                    <input name="name" type="text"
-                        class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors"
-                        placeholder="Search">
-                </div>
-            </div>
-
-            <div>
-                <label class="form-label font-medium text-slate-900 dark:text-white">Start Date:</label>
-                <div class="relative mt-2">
-                    <i data-feather="calendar" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                    <input type="date" name="start_date" value="{{ date('Y-m-d') }}"
-                        class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors">
-                </div>
-            </div>
-
-            <div>
-                <label class="form-label font-medium text-slate-900 dark:text-white">End Date:</label>
-                <div class="relative mt-2">
-                    <i data-feather="calendar" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                    <input type="date" name="end_date" value="{{ date('Y-m-d') }}"
-                         class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors">
-                </div>
-            </div>
-
-            <div>
-                <label class="form-label font-medium text-slate-900 dark:text-white">No. of person:</label>
-                <div class="relative mt-2">
-                    <i data-feather="users" class="size-[18px] absolute top-[10px] start-3 text-slate-400"></i>
-                    <select name="people_count"
-                        class="w-full py-3 px-3 ps-10 h-12 bg-white dark:bg-slate-800 text-slate-500 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md border border-gray-300 dark:border-gray-300   outline-none transition-colors cursor-pointer">
-                        <option disabled selected>No. of person</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="lg:mt-[35px]">
-                <input type="submit"
-                    class="py-2 px-5 h-12 inline-block tracking-wide text-base bg-red-500 hover:bg-red-600 text-white rounded-md w-full cursor-pointer transition-colors duration-300"
-                    value="Submit">
+    <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight">Safaris, Car Hire &amp; Flights in Tanzania</h1>
+            <p class="mt-4 text-base md:text-lg text-white/90">Tell us your dates and budget. We plan the trip and send you a clear quote.</p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="{{ \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like a quote for a trip.') }}" @if (\App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif
+                   class="py-3 px-6 rounded-md bg-red-500 hover:bg-red-600 text-white font-semibold">{{ \App\Support\Site::hasWhatsapp() ? 'Get a Quote on WhatsApp' : 'Get a Quote' }}</a>
+                <a href="#packages" class="py-3 px-6 rounded-md bg-white/90 hover:bg-white text-slate-900 font-semibold">See Tour Packages</a>
             </div>
         </div>
     </div>
-</form>
 
-
-    </div>
-</div>
+    <button @click="prevSlide()" x-show="slides.length > 1" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
+        <i class="mdi mdi-chevron-left text-4xl"></i>
+    </button>
+    <button @click="nextSlide()" x-show="slides.length > 1" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 text-white hover:text-red-500 p-2 rounded-full bg-black/20 hover:bg-black/40 transition">
+        <i class="mdi mdi-chevron-right text-4xl"></i>
+    </button>
+</section>
 
 <!-- 3. Our Services -->
 <section class="relative md:mt-16 mt-8 bg-white">
     <div class="container mx-auto pt-12 pb-16 px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-                Choose Our Tour Types & Enjoy Now
+                What We Can Arrange for You
             </h2>
         </div>
 
@@ -193,13 +141,13 @@
     }
 @endphp
 
-<div class="container relative md:mt-24 mt-16" x-data="tourSlider()" x-init="startAutoSlide()">
+<div id="packages" class="container relative md:mt-24 mt-16" x-data="tourSlider()" x-init="startAutoSlide()">
     <div class="grid grid-cols-1 pb-8">
         <div class="flex items-center justify-between">
             <div class="text-center w-full">
                 <h3 class="mb-6 md:text-3xl text-2xl md:leading-normal leading-normal font-semibold">Tour Packages</h3>
                 <p class="text-slate-400 max-w-xl mx-auto">
-                    Planning for a trip? We will organize your trip with the best places and within best budget!
+                    Sample trips to start from. Prices are per person; tell us your dates and group size for a firm quote.
                 </p>
             </div>
 
@@ -226,7 +174,7 @@
             <template x-for="(page, pageIndex) in pages" :key="pageIndex">
                 <div class="w-full flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
                     <template x-for="tour in page" :key="tour.id">
-                        <a :href="`/tour-detail-two/${tour.slug}`"
+                        <a :href="quoteHref(tour)" :target="isWa ? '_blank' : '_self'" rel="noopener"
                            class="block bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden group">
 
                             <div class="relative">
@@ -242,16 +190,14 @@
 
                             <div class="p-5">
                                 <h4 class="text-lg font-bold text-slate-900 mb-2" x-text="tour.title"></h4>
-                                <p class="text-sm text-gray-600 mb-4" x-text="tour.description.substring(0, 80) + '...'"></p>
+                                <p class="text-sm text-gray-600 mb-4" x-text="tour.description.length > 80 ? tour.description.substring(0, 80).trim() + '…' : tour.description"></p>
 
                                 <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                    <div class="flex items-center gap-1 text-yellow-500 text-sm">
-                                        ★★★★★ <span class="text-slate-400 ml-1">(4.9)</span>
-                                    </div>
+                                    <div class="text-sm text-slate-500" x-show="tour.price">From</div>
                                     <div class="flex items-center gap-2">
                                         <span class="text-red-600 font-bold text-lg" x-show="tour.price" x-text="tour.price"></span>
                                         <span class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full transition">
-                                            Book Now
+                                            Get a Quote
                                         </span>
                                     </div>
                                 </div>
@@ -284,28 +230,28 @@
         (object) [
             'title'       => 'Mount Kilimanjaro',
             'slug'        => 'mount-kilimanjaro',
-            'description' => 'The Roof of Africa — a bucket-list trek for adventurers seeking the ultimate summit.',
+            'description' => 'The Roof of Africa: a guided trek to the top of Tanzania.',
             'image'       => 'assets/images/bg/1.jpg',
             'is_default'  => true,
         ],
         (object) [
             'title'       => 'Mount Meru Trek',
             'slug'        => 'mount-meru-trek',
-            'description' => 'A stunning warm-up climb with dramatic views of Kilimanjaro and Arusha National Park.',
+            'description' => 'A shorter climb with big views of Kilimanjaro. Good as a first trek.',
             'image'       => 'assets/images/bg/2.jpg',
             'is_default'  => true,
         ],
         (object) [
             'title'       => 'Zanzibar Beaches',
             'slug'        => 'zanzibar-beaches',
-            'description' => 'Turquoise waters, powder-white sand, and rich Swahili culture on the spice island.',
+            'description' => 'White sand, clear water and Swahili culture, with stays arranged.',
             'image'       => 'assets/images/bg/3.jpg',
             'is_default'  => true,
         ],
         (object) [
             'title'       => 'Nungwi Beach',
             'slug'        => 'nungwi-beach',
-            'description' => 'Zanzibar’s most vibrant beach — perfect for sunsets, dhow cruises, and snorkeling.',
+            'description' => 'Zanzibar\'s liveliest beach for sunsets, dhow cruises and snorkelling.',
             'image'       => 'assets/images/bg/4.jpg',
             'is_default'  => true,
         ],
@@ -352,7 +298,7 @@
                     @php
                         $isDefault = !empty($destination->is_default);
                         $imgSrc    = $isDefault ? asset($destination->image) : asset('storage/' . $destination->image);
-                        $detailUrl = $isDefault ? '#' : route('destination-detail', $destination->slug);
+                        $detailUrl = $isDefault ? \App\Support\Site::wa('Hello ' . config('site.name') . ', I would like details about: ' . $destination->title) : route('destination-detail', $destination->slug);
 
                         $title = strtolower($destination->title);
                         if (str_contains($title, 'beach') || str_contains($title, 'zanzibar') || str_contains($title, 'nungwi')) {
@@ -374,7 +320,7 @@
                         <div class="p-4">
                             <h4 class="text-lg font-semibold text-red-600">{{ $destination->title }}</h4>
                             <p class="text-sm text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($destination->description, 80) }}</p>
-                            <a href="{{ $detailUrl }}" class="p-2 relative top-1.5 bg-black rounded-3xl text-white">View Details</a>
+                            <a href="{{ $detailUrl }}" @if ($isDefault && \App\Support\Site::hasWhatsapp()) target="_blank" rel="noopener" @endif class="p-2 px-4 relative top-1.5 bg-black rounded-3xl text-white inline-block">{{ $isDefault ? 'Ask About This Trip' : 'View Details' }}</a>
                         </div>
                     </div>
                 @endforeach
@@ -383,17 +329,25 @@
     </div>
 </section>
 
-<!-- 7. Reviews -->
+<!-- 7. How booking works -->
 <section class="relative md:py-24 py-16 overflow-hidden">
 <div class="container relative">
     <div class="grid grid-cols-1 pb-5 text-center">
-        <h3 class="mb-6 md:text-3xl text-2xl font-semibold">What Our Users Say</h3>
-        <p class="text-slate-400 max-w-xl mx-auto">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
+        <h3 class="mb-6 md:text-3xl text-2xl font-semibold">How Booking Works</h3>
+        <p class="text-slate-400 max-w-xl mx-auto">Three simple steps from first message to departure.</p>
     </div>
-    <div class="grid grid-cols-1 mt-6">
-        <div class="tiny-three-item">
-            @include('includes.Hero.reviews')
-        </div>
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-8 mt-6">
+        @foreach ([
+            ['1', 'Tell us where and when', 'Send your dates, group size and budget on WhatsApp or the contact form.'],
+            ['2', 'Get a clear quote', 'You see the full price and what is included before you pay anything.'],
+            ['3', 'Travel with support', 'We arrange the vehicle, flights and stays, and stay reachable throughout your trip.'],
+        ] as [$n, $title, $text])
+            <div class="text-center px-6">
+                <div class="size-14 mx-auto rounded-full bg-red-500 text-white text-xl font-bold flex items-center justify-center">{{ $n }}</div>
+                <h5 class="mt-5 text-lg font-semibold">{{ $title }}</h5>
+                <p class="text-slate-400 mt-3">{{ $text }}</p>
+            </div>
+        @endforeach
     </div>
 </div>
 </section>
@@ -449,6 +403,14 @@
             active: 0,
             pages: [],
             tours: @json($tourList),
+            waBase: @json(\App\Support\Site::waBase()),
+            isWa: @json(\App\Support\Site::hasWhatsapp()),
+            quoteHref(tour) {
+                const msg = this.isWa
+                    ? 'Hello {{ config('site.name') }}, I would like a quote for: ' + tour.title
+                    : tour.title;
+                return this.waBase + encodeURIComponent(msg);
+            },
 
             chunkArray(array, size) {
                 const chunks = [];
