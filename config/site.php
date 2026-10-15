@@ -20,7 +20,7 @@ return [
     'demo'        => filter_var(env('SITE_DEMO', true), FILTER_VALIDATE_BOOLEAN),
 
     'phone'       => env('SITE_PHONE'),        // e.g. "+255 7XX XXX XXX"
-    'whatsapp'    => env('SITE_WHATSAPP', '2557XXXXXXXX'),     // digits only, e.g. 2557XXXXXXXX
+    'whatsapp'    => env('SITE_WHATSAPP', '255655682268'),     // digits only, e.g. 2557XXXXXXXX
     'email'       => env('SITE_EMAIL'),        // e.g. info@client.co.tz
     'address'     => env('SITE_ADDRESS'),      // multi-line allowed with "\n"
     'hours'       => env('SITE_HOURS', 'Mon-Sat: 8am to 6pm'),

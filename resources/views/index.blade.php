@@ -129,7 +129,7 @@
             <a class="bisech-btn" href="{{ route('about') }}">Get to know Bisech <span aria-hidden="true">↗</span></a>
         </div>
         <div class="bisech-intro-photo" aria-label="Tanzania wildlife and landscapes">
-            <img src="{{ asset('assets/images/Bisech010 (1).jpg') }}" alt="Zebras on the Tanzanian savannah" loading="lazy">
+            <img src="{{ asset('assets/images/Bisech010.jpg') }}" alt="Zebras on the Tanzanian savannah" loading="lazy">
             <span class="bisech-photo-caption">The beauty is in the details</span>
         </div>
     </section>
