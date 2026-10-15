@@ -93,14 +93,19 @@
         </div>
 
         <div>
-            <img
-                class="bp-photo"
+            <img class="bp-photo"
                 src="{{ $image }}"
                 alt="{{ $tour->title }}"
-                loading="lazy"
-                onerror="this.onerror=null; this.src='{{ asset('assets/images/slide/Bisech003.webp') }}';"
-            >
-        </div>
+                loading="lazy">
+
+            @if ($tour->slug === 'safari-and-zanzibar-combination')
+                <img class="bp-photo"
+                    src="{{ asset('assets/images/listing/5.jpg') }}"
+                    alt="Zanzibar beach and coastal scenery"
+                    loading="lazy"
+                    style="margin-top: 20px;">
+            @endif
+</div>
 
     </div>
 </section>

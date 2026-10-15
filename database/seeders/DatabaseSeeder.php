@@ -40,11 +40,14 @@ class DatabaseSeeder extends Seeder
                 'paragraph' => "The Northern Circuit offers different ways to experience Tanzania’s landscapes and wildlife. Tell Bisech which places interest you and how long you plan to travel, and we can discuss a suitable route.\n\nThis is a starting point for an enquiry rather than a fixed itinerary. Park selection, accommodation, transport, availability and pricing need to be agreed for your dates.",
             ],
             [
-                'title' => 'Kilimanjaro Climbing Enquiry', 'slug' => 'kilimanjaro-climbing',
-                'image' => 'assets/images/slide/Bisech 006.webp',
+                'title' => 'Kilimanjaro Climbing Enquiry',
+                'slug' => 'kilimanjaro-climbing',
+                'image' => 'assets/images/kilimanjaro-climbing.jpg',
                 'description' => 'Discuss Kilimanjaro route options, timing, group size and preparation for a mountain journey.',
                 'paragraph' => "Planning a Kilimanjaro climb starts with choosing an appropriate route and travel period, understanding the physical demands and reviewing the arrangements required for your group. Contact Bisech to discuss your preferred month, group size and hiking experience.\n\nRoute, duration, operator arrangements, inclusions, availability and price must be confirmed before any booking.",
             ],
+
+
             [
                 'title' => 'Zanzibar Island Escape', 'slug' => 'zanzibar-island-escape',
                 'image' => 'assets/images/listing/5.jpg',
